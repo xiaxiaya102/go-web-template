@@ -1,0 +1,1343 @@
+basePath: /api
+definitions:
+  dto.LoginRequest:
+    properties:
+      password:
+        description: 密码
+        example: "123456"
+        type: string
+      userName:
+        description: 用户名
+        example: admin
+        type: string
+    required:
+    - password
+    - userName
+    type: object
+  dto.LoginResponse:
+    properties:
+      token:
+        description: 用户token
+        example: abc123
+        type: string
+    type: object
+  dto.LogoutRequest:
+    properties:
+      token:
+        description: 用户token
+        example: abc123
+        type: string
+    required:
+    - token
+    type: object
+  dto.MediaConfigPageResponse:
+    properties:
+      list:
+        items:
+          $ref: '#/definitions/dto.MediaConfigResponse'
+        type: array
+      total:
+        type: integer
+    type: object
+  dto.MediaConfigResponse:
+    properties:
+      code:
+        type: string
+      id:
+        type: integer
+      media_desc:
+        type: string
+      name:
+        type: string
+      status:
+        type: string
+      type:
+        type: string
+      url:
+        type: string
+    type: object
+  dto.ModelsInfoResponse:
+    properties:
+      algorithm:
+        description: 算法
+        type: string
+      classify:
+        description: 分类
+        type: string
+      date_time:
+        description: 日期时间
+        type: string
+      description:
+        description: 描述
+        type: string
+      id:
+        description: 模型ID
+        type: integer
+      name:
+        description: 模型名称
+        type: string
+      sophon_type:
+        description: Sophon类型
+        type: integer
+      specialty:
+        description: 专业性
+        type: integer
+    type: object
+  dto.NetworkConfigResponse:
+    properties:
+      bandwidth:
+        description: 带宽，如"100Mb/s"
+        type: string
+      bandwidth_varity:
+        description: 带宽变化
+        type: boolean
+      device:
+        description: 网络设备，如"eth0"
+        type: string
+      dns:
+        description: DNS服务器
+        type: string
+      gateway:
+        description: 网关地址
+        type: string
+      ip:
+        description: IP地址
+        type: string
+      mac:
+        description: MAC地址
+        type: string
+      netmask:
+        description: 子网掩码
+        type: string
+      status:
+        description: 网络状态：static/dynamic
+        type: string
+    type: object
+  dto.SaveAlarmCategoryRequest:
+    properties:
+      alarm_desc:
+        description: 告警描述
+        type: string
+      alarm_type:
+        description: 告警类别
+        type: string
+      arithmetic:
+        description: 所属算法
+        type: string
+      audio_file:
+        description: 语音文件
+        type: string
+      sophon_type:
+        description: Sophon类型
+        type: integer
+    required:
+    - alarm_type
+    - arithmetic
+    type: object
+  dto.SaveAlarmManageRequest:
+    properties:
+      alarm_detail:
+        type: string
+      alarm_task:
+        type: string
+      alarm_type:
+        type: string
+      alarm_video:
+        type: string
+      img:
+        type: string
+      init_img:
+        type: string
+      media_id:
+        type: integer
+      media_url:
+        type: string
+      report_addr:
+        type: string
+      report_status:
+        type: integer
+      tm:
+        type: string
+      video_media:
+        type: string
+    required:
+    - alarm_task
+    type: object
+  dto.SaveDeviceListRequest:
+    properties:
+      face_device:
+        description: 是否为人脸设备
+        type: integer
+      ip_address:
+        description: IP地址
+        type: string
+      last_used_tm:
+        description: 最后使用时间
+        type: string
+      status:
+        description: 设备状态
+        type: integer
+    required:
+    - ip_address
+    type: object
+  dto.SaveMediaConfigRequest:
+    properties:
+      code:
+        description: 编码
+        example: CAM001
+        type: string
+      media_desc:
+        description: 媒体描述
+        example: 前门摄像头
+        type: string
+      name:
+        description: 媒体名称
+        example: 摄像头1
+        type: string
+      status:
+        description: 状态
+        example: active
+        type: string
+      type:
+        description: 类型
+        example: camera
+        type: string
+      url:
+        description: 媒体URL
+        example: rtsp://...
+        type: string
+    required:
+    - name
+    - url
+    type: object
+  dto.SaveModelsInfoRequest:
+    properties:
+      algorithm:
+        description: 算法
+        example: face_detection
+        type: string
+      classify:
+        description: 分类
+        example: 人脸识别
+        type: string
+      date_time:
+        description: 日期时间
+        example: "2024-01-01 12:00:00"
+        type: string
+      description:
+        description: 描述
+        example: 用于人脸识别的深度学习模型
+        type: string
+      name:
+        description: 模型名称
+        example: 人脸识别模型
+        type: string
+      sophon_type:
+        description: Sophon类型
+        example: 1
+        type: integer
+      specialty:
+        description: 专业性
+        example: 1
+        type: integer
+    required:
+    - algorithm
+    - name
+    type: object
+  dto.SaveParamConfRequest:
+    properties:
+      key:
+        description: 配置键
+        type: string
+      param:
+        description: 参数名称
+        type: string
+      param_value:
+        description: 参数值
+        type: string
+    required:
+    - key
+    - param
+    type: object
+  dto.SavePlanTemplateRequest:
+    properties:
+      name:
+        type: string
+      plan:
+        type: string
+    required:
+    - name
+    - plan
+    type: object
+  dto.SaveTaskManageRequest:
+    properties:
+      alarm_interval:
+        example: 30
+        type: integer
+      arit_params:
+        example: '{"threshold":0.8}'
+        type: string
+      arithmetic_config:
+        example: 人脸识别+行为分析
+        type: string
+      media_id:
+        example: 1
+        type: integer
+      media_source:
+        example: rtsp://192.168.1.100/stream
+        type: string
+      name:
+        example: 监控任务1
+        type: string
+      plan_id:
+        example: 1
+        type: integer
+      report_addr:
+        example: http://192.168.1.200/api/alarm
+        type: string
+      sophon_types:
+        example: 1,2,3
+        type: string
+      status_desc:
+        example: 运行中
+        type: string
+      task_status:
+        example: 1
+        type: integer
+      used_ip:
+        example: 192.168.1.100
+        type: string
+      work_plan:
+        example: 全天候监控
+        type: string
+    required:
+    - name
+    type: object
+  dto.SaveThresholdConfRequest:
+    properties:
+      param_desc:
+        description: 参数描述
+        type: string
+      param_value:
+        description: 参数值
+        type: number
+      sophon_type:
+        description: Sophon类型
+        type: integer
+    required:
+    - param_desc
+    type: object
+  dto.UpdateAlarmManageRequest:
+    properties:
+      alarm_detail:
+        type: string
+      alarm_task:
+        type: string
+      alarm_type:
+        type: string
+      alarm_video:
+        type: string
+      id:
+        type: integer
+      img:
+        type: string
+      init_img:
+        type: string
+      media_id:
+        type: integer
+      media_url:
+        type: string
+      report_addr:
+        type: string
+      report_status:
+        type: integer
+      tm:
+        type: string
+      video_media:
+        type: string
+    required:
+    - alarm_task
+    - id
+    type: object
+  dto.UpdateMediaConfigRequest:
+    properties:
+      code:
+        description: 编码
+        example: CAM001
+        type: string
+      id:
+        description: 媒体配置ID
+        example: 1
+        type: integer
+      media_desc:
+        description: 媒体描述
+        example: 前门摄像头
+        type: string
+      name:
+        description: 媒体名称
+        example: 摄像头1
+        type: string
+      status:
+        description: 状态
+        example: active
+        type: string
+      type:
+        description: 类型
+        example: camera
+        type: string
+      url:
+        description: 媒体URL
+        example: rtsp://...
+        type: string
+    required:
+    - id
+    - name
+    - url
+    type: object
+  dto.UpdatePlanTemplateRequest:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      plan:
+        type: string
+    required:
+    - id
+    - name
+    - plan
+    type: object
+  dto.UpdateTaskManageRequest:
+    properties:
+      alarm_interval:
+        type: integer
+      arit_params:
+        type: string
+      arithmetic_config:
+        type: string
+      id:
+        type: integer
+      media_id:
+        type: integer
+      media_source:
+        type: string
+      name:
+        type: string
+      plan_id:
+        type: integer
+      report_addr:
+        type: string
+      sophon_types:
+        type: string
+      status_desc:
+        type: string
+      task_status:
+        type: integer
+      used_ip:
+        type: string
+      work_plan:
+        type: string
+    required:
+    - id
+    - name
+    type: object
+  handle.Response:
+    properties:
+      code:
+        description: 响应码，0表示成功
+        example: 0
+        type: integer
+      msg:
+        description: 响应消息
+        example: ok
+        type: string
+      result:
+        description: 响应数据
+        type: object
+    type: object
+  model.AlarmCategory:
+    properties:
+      alarm_desc:
+        description: 告警描述
+        type: string
+      alarm_type:
+        description: 告警类别
+        type: string
+      arithmetic:
+        description: 所属算法
+        type: string
+      audio_file:
+        description: 语音文件
+        type: string
+      id:
+        type: integer
+      sophon_type:
+        description: Sophon类型
+        type: integer
+    type: object
+  model.AlarmManage:
+    properties:
+      alarm_detail:
+        type: string
+      alarm_task:
+        type: string
+      alarm_type:
+        type: string
+      alarm_video:
+        type: string
+      id:
+        type: integer
+      img:
+        type: string
+      init_img:
+        description: 原图
+        type: string
+      media_id:
+        type: integer
+      media_url:
+        type: string
+      report_addr:
+        type: string
+      report_status:
+        type: integer
+      tm:
+        type: string
+      video_media:
+        type: string
+    type: object
+  model.DeviceList:
+    properties:
+      face_device:
+        description: 是否为人脸设备：0否，1是
+        type: integer
+      id:
+        type: integer
+      ip_address:
+        description: IP地址
+        type: string
+      last_used_tm:
+        description: 最后使用时间
+        type: string
+      status:
+        description: 设备状态：0离线，1在线
+        type: integer
+    type: object
+  model.MediaConfig:
+    properties:
+      code:
+        type: string
+      id:
+        type: integer
+      media_desc:
+        type: string
+      name:
+        type: string
+      status:
+        type: string
+      type:
+        type: string
+      url:
+        type: string
+    type: object
+  model.ModelsInfo:
+    properties:
+      algorithm:
+        description: 算法
+        type: string
+      classify:
+        description: 分类
+        type: string
+      date_time:
+        description: 日期时间
+        type: string
+      description:
+        description: 描述
+        type: string
+      id:
+        type: integer
+      name:
+        description: 模型名称
+        type: string
+      sophon_type:
+        description: Sophon类型
+        type: integer
+      specialty:
+        description: 专业性
+        type: integer
+    type: object
+  model.ParamConf:
+    properties:
+      id:
+        type: integer
+      key:
+        description: 配置键
+        type: string
+      param:
+        description: 参数名称
+        type: string
+      param_value:
+        description: 参数值
+        type: string
+    type: object
+  model.PlanTemplate:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      plan:
+        type: string
+    type: object
+  model.TaskManage:
+    properties:
+      alarm_interval:
+        type: integer
+      arit_params:
+        type: string
+      arithmetic_config:
+        type: string
+      id:
+        type: integer
+      media_id:
+        type: integer
+      media_source:
+        type: string
+      name:
+        type: string
+      plan_id:
+        type: integer
+      report_addr:
+        type: string
+      sophon_types:
+        type: string
+      status_desc:
+        type: string
+      task_status:
+        type: integer
+      used_ip:
+        type: string
+      work_plan:
+        type: string
+    type: object
+  model.ThresholdConf:
+    properties:
+      id:
+        type: integer
+      param_desc:
+        description: 参数描述
+        type: string
+      param_value:
+        description: 参数值
+        type: number
+      sophon_type:
+        description: Sophon类型
+        type: integer
+    type: object
+externalDocs:
+  description: OpenAPI
+  url: https://swagger.io/resources/open-api/
+host: localhost:8089
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a daily news reboot server API documentation.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Daily News Reboot API
+  version: "1.0"
+paths:
+  /alarmCategory/saveAlarmCategory:
+    post:
+      consumes:
+      - application/json
+      description: 保存新的告警分类信息
+      parameters:
+      - description: 告警分类信息
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.SaveAlarmCategoryRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 保存成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/handle.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.AlarmCategory'
+              type: object
+        "400":
+          description: 参数错误
+          schema:
+            $ref: '#/definitions/handle.Response'
+      summary: 保存告警分类
+      tags:
+      - 告警分类
+  /alarmManage/saveAlarmManage:
+    post:
+      consumes:
+      - application/json
+      description: 保存新的报警管理信息
+      parameters:
+      - description: 报警管理信息
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.SaveAlarmManageRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 保存成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/handle.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.AlarmManage'
+              type: object
+        "400":
+          description: 参数错误
+          schema:
+            $ref: '#/definitions/handle.Response'
+      summary: 保存报警管理
+      tags:
+      - 报警管理
+  /alarmManage/updateAlarmManage:
+    post:
+      consumes:
+      - application/json
+      description: 更新已有的报警管理信息
+      parameters:
+      - description: 报警管理更新信息
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdateAlarmManageRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 更新成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/handle.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.AlarmManage'
+              type: object
+        "400":
+          description: 参数错误
+          schema:
+            $ref: '#/definitions/handle.Response'
+      summary: 更新报警管理
+      tags:
+      - 报警管理
+  /deviceList/saveDeviceList:
+    post:
+      consumes:
+      - application/json
+      description: 保存新的设备信息
+      parameters:
+      - description: 设备信息
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.SaveDeviceListRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 保存成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/handle.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.DeviceList'
+              type: object
+        "400":
+          description: 参数错误
+          schema:
+            $ref: '#/definitions/handle.Response'
+      summary: 保存设备信息
+      tags:
+      - 设备管理
+  /login:
+    post:
+      consumes:
+      - application/json
+      description: 用户登录接口
+      parameters:
+      - description: 登录请求参数
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 登录成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/handle.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/dto.LoginResponse'
+              type: object
+        "400":
+          description: 参数错误
+          schema:
+            $ref: '#/definitions/handle.Response'
+        "401":
+          description: 用户名或密码错误
+          schema:
+            $ref: '#/definitions/handle.Response'
+      summary: 用户登录
+      tags:
+      - 基础接口
+  /logout:
+    post:
+      consumes:
+      - application/json
+      description: 用户登出接口
+      parameters:
+      - description: 登出请求参数
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.LogoutRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 登出成功
+          schema:
+            $ref: '#/definitions/handle.Response'
+        "400":
+          description: 参数错误
+          schema:
+            $ref: '#/definitions/handle.Response'
+        "401":
+          description: 未授权
+          schema:
+            $ref: '#/definitions/handle.Response'
+      security:
+      - BearerAuth: []
+      summary: 用户登出
+      tags:
+      - 基础接口
+  /mainModule/delMediaConfig/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: 根据ID删除媒体配置
+      parameters:
+      - description: 媒体配置ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 删除成功
+          schema:
+            $ref: '#/definitions/handle.Response'
+        "400":
+          description: 参数错误
+          schema:
+            $ref: '#/definitions/handle.Response'
+      summary: 删除媒体配置
+      tags:
+      - 媒体配置
+  /mainModule/getMediaConfig/{id}:
+    get:
+      consumes:
+      - application/json
+      description: 根据ID获取媒体配置的详细信息
+      parameters:
+      - description: 媒体配置ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 获取成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/handle.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.MediaConfig'
+              type: object
+        "400":
+          description: 参数错误
+          schema:
+            $ref: '#/definitions/handle.Response'
+      summary: 获取媒体配置详情
+      tags:
+      - 媒体配置
+  /mainModule/getMediaConfigPage:
+    get:
+      consumes:
+      - application/json
+      description: 分页获取媒体配置列表
+      parameters:
+      - default: 1
+        description: 页码
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: 每页数量
+        in: query
+        name: pageSize
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 获取成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/handle.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/dto.MediaConfigPageResponse'
+              type: object
+        "400":
+          description: 参数错误
+          schema:
+            $ref: '#/definitions/handle.Response'
+      summary: 分页获取媒体配置
+      tags:
+      - 媒体配置
+  /mainModule/saveMediaConfig:
+    post:
+      consumes:
+      - application/json
+      description: 保存新的媒体配置信息
+      parameters:
+      - description: 媒体配置信息
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.SaveMediaConfigRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 保存成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/handle.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.MediaConfig'
+              type: object
+        "400":
+          description: 参数错误
+          schema:
+            $ref: '#/definitions/handle.Response'
+        "401":
+          description: 未授权
+          schema:
+            $ref: '#/definitions/handle.Response'
+      security:
+      - BearerAuth: []
+      summary: 保存媒体配置
+      tags:
+      - 媒体配置
+  /mainModule/updateMediaConfig:
+    post:
+      consumes:
+      - application/json
+      description: 更新已有的媒体配置信息
+      parameters:
+      - description: 媒体配置更新信息
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdateMediaConfigRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 更新成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/handle.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.MediaConfig'
+              type: object
+        "400":
+          description: 参数错误
+          schema:
+            $ref: '#/definitions/handle.Response'
+        "401":
+          description: 未授权
+          schema:
+            $ref: '#/definitions/handle.Response'
+      security:
+      - BearerAuth: []
+      summary: 更新媒体配置
+      tags:
+      - 媒体配置
+  /modelsInfo/getModelsInfo/{id}:
+    get:
+      consumes:
+      - application/json
+      description: 根据模型ID获取详细信息
+      parameters:
+      - description: 模型ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 获取成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/handle.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/dto.ModelsInfoResponse'
+              type: object
+        "400":
+          description: 参数错误
+          schema:
+            $ref: '#/definitions/handle.Response'
+      summary: 根据ID获取模型信息
+      tags:
+      - 模型信息
+  /modelsInfo/getModelsInfoAll:
+    get:
+      consumes:
+      - application/json
+      description: 获取系统中所有的模型信息列表
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 获取成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/handle.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/dto.ModelsInfoResponse'
+                  type: array
+              type: object
+        "400":
+          description: 获取失败
+          schema:
+            $ref: '#/definitions/handle.Response'
+      summary: 获取所有模型信息
+      tags:
+      - 模型信息
+  /modelsInfo/saveModelsInfo:
+    post:
+      consumes:
+      - application/json
+      description: 保存新的模型信息
+      parameters:
+      - description: 模型信息
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.SaveModelsInfoRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 保存成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/handle.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.ModelsInfo'
+              type: object
+        "400":
+          description: 参数错误
+          schema:
+            $ref: '#/definitions/handle.Response'
+      summary: 保存模型信息
+      tags:
+      - 模型信息
+  /networkConfig/getNetworkConfig/{device}:
+    get:
+      consumes:
+      - application/json
+      description: 根据设备名称获取指定网络接口的配置信息
+      parameters:
+      - description: 网络设备名称
+        in: path
+        name: device
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 获取成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/handle.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/dto.NetworkConfigResponse'
+              type: object
+        "400":
+          description: 参数错误
+          schema:
+            $ref: '#/definitions/handle.Response'
+      summary: 获取网络接口配置
+      tags:
+      - 网络配置
+  /networkConfig/getNetworkInterfaces:
+    get:
+      consumes:
+      - application/json
+      description: 获取系统中所有网络接口的配置信息列表
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 获取成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/handle.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/dto.NetworkConfigResponse'
+                  type: array
+              type: object
+        "400":
+          description: 获取失败
+          schema:
+            $ref: '#/definitions/handle.Response'
+      summary: 获取所有网络接口
+      tags:
+      - 网络配置
+  /paramConf/saveParamConf:
+    post:
+      consumes:
+      - application/json
+      description: 保存新的参数配置信息
+      parameters:
+      - description: 参数配置信息
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.SaveParamConfRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 保存成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/handle.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.ParamConf'
+              type: object
+        "400":
+          description: 参数错误
+          schema:
+            $ref: '#/definitions/handle.Response'
+      summary: 保存参数配置
+      tags:
+      - 参数配置
+  /planTemplate/savePlanTemplate:
+    post:
+      consumes:
+      - application/json
+      description: 保存新的计划模板信息
+      parameters:
+      - description: 计划模板信息
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.SavePlanTemplateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 保存成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/handle.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.PlanTemplate'
+              type: object
+        "400":
+          description: 参数错误
+          schema:
+            $ref: '#/definitions/handle.Response'
+      summary: 保存计划模板
+      tags:
+      - 计划模板
+  /planTemplate/updatePlanTemplate:
+    post:
+      consumes:
+      - application/json
+      description: 更新已有的计划模板信息
+      parameters:
+      - description: 计划模板更新信息
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdatePlanTemplateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 更新成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/handle.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.PlanTemplate'
+              type: object
+        "400":
+          description: 参数错误
+          schema:
+            $ref: '#/definitions/handle.Response'
+      summary: 更新计划模板
+      tags:
+      - 计划模板
+  /taskManage/saveTaskManage:
+    post:
+      consumes:
+      - application/json
+      description: 保存新的任务管理信息
+      parameters:
+      - description: 任务管理信息
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.SaveTaskManageRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 保存成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/handle.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.TaskManage'
+              type: object
+        "400":
+          description: 参数错误
+          schema:
+            $ref: '#/definitions/handle.Response'
+      summary: 保存任务管理
+      tags:
+      - 任务管理
+  /taskManage/updateTaskManage:
+    post:
+      consumes:
+      - application/json
+      description: 更新已有的任务管理信息
+      parameters:
+      - description: 任务管理更新信息
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdateTaskManageRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 更新成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/handle.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.TaskManage'
+              type: object
+        "400":
+          description: 参数错误
+          schema:
+            $ref: '#/definitions/handle.Response'
+      summary: 更新任务管理
+      tags:
+      - 任务管理
+  /thresholdConf/saveThresholdConf:
+    post:
+      consumes:
+      - application/json
+      description: 保存新的阈值配置信息
+      parameters:
+      - description: 阈值配置信息
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.SaveThresholdConfRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 保存成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/handle.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.ThresholdConf'
+              type: object
+        "400":
+          description: 参数错误
+          schema:
+            $ref: '#/definitions/handle.Response'
+      summary: 保存阈值配置
+      tags:
+      - 阈值配置
+securityDefinitions:
+  BearerAuth:
+    description: Type "Bearer" followed by a space and JWT token.
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

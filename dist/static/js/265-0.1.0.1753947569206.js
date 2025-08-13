@@ -1,0 +1,1 @@
+"use strict";(self["webpackChunkvue_basic_dev_platform"]=self["webpackChunkvue_basic_dev_platform"]||[]).push([[265],{3265:function(e,u,t){t.r(u),t.d(u,{default:function(){return s}});var r=function(){var e=this,u=e._self._c;return u("router-view",{key:e.$route.fullPath})},n=[],l={name:"Redirect"},a=l,f=t(1656),c=(0,f.A)(a,r,n,!1,null,"798195fe",null),s=c.exports}}]);
