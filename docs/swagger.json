@@ -1,8 +1,8 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "This is a daily news reboot server API documentation.",
-        "title": "Daily News Reboot API",
+        "description": "Go Web后台管理框架API文档",
+        "title": "Go Web Admin API",
         "termsOfService": "http://swagger.io/terms/",
         "contact": {
             "name": "API Support",
@@ -10,222 +10,14 @@
             "email": "support@swagger.io"
         },
         "license": {
-            "name": "Apache 2.0",
-            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
         },
         "version": "1.0"
     },
     "host": "localhost:8089",
     "basePath": "/api",
     "paths": {
-        "/alarmCategory/saveAlarmCategory": {
-            "post": {
-                "description": "保存新的告警分类信息",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "告警分类"
-                ],
-                "summary": "保存告警分类",
-                "parameters": [
-                    {
-                        "description": "告警分类信息",
-                        "name": "request",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/dto.SaveAlarmCategoryRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "保存成功",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/handle.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/model.AlarmCategory"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "参数错误",
-                        "schema": {
-                            "$ref": "#/definitions/handle.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/alarmManage/saveAlarmManage": {
-            "post": {
-                "description": "保存新的报警管理信息",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "报警管理"
-                ],
-                "summary": "保存报警管理",
-                "parameters": [
-                    {
-                        "description": "报警管理信息",
-                        "name": "request",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/dto.SaveAlarmManageRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "保存成功",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/handle.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/model.AlarmManage"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "参数错误",
-                        "schema": {
-                            "$ref": "#/definitions/handle.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/alarmManage/updateAlarmManage": {
-            "post": {
-                "description": "更新已有的报警管理信息",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "报警管理"
-                ],
-                "summary": "更新报警管理",
-                "parameters": [
-                    {
-                        "description": "报警管理更新信息",
-                        "name": "request",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/dto.UpdateAlarmManageRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "更新成功",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/handle.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/model.AlarmManage"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "参数错误",
-                        "schema": {
-                            "$ref": "#/definitions/handle.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/deviceList/saveDeviceList": {
-            "post": {
-                "description": "保存新的设备信息",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "设备管理"
-                ],
-                "summary": "保存设备信息",
-                "parameters": [
-                    {
-                        "description": "设备信息",
-                        "name": "request",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/dto.SaveDeviceListRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "保存成功",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/handle.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/model.DeviceList"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "参数错误",
-                        "schema": {
-                            "$ref": "#/definitions/handle.Response"
-                        }
-                    }
-                }
-            }
-        },
         "/login": {
             "post": {
                 "description": "用户登录接口",
@@ -335,9 +127,14 @@
                 }
             }
         },
-        "/mainModule/delMediaConfig/{id}": {
-            "delete": {
-                "description": "根据ID删除媒体配置",
+        "/permission": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "获取权限树形列表",
                 "consumes": [
                     "application/json"
                 ],
@@ -345,13 +142,232 @@
                     "application/json"
                 ],
                 "tags": [
-                    "媒体配置"
+                    "权限管理"
                 ],
-                "summary": "删除媒体配置",
+                "summary": "获取权限列表",
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/handle.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/dto.PermissionResponse"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "创建新权限",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "权限管理"
+                ],
+                "summary": "创建权限",
+                "parameters": [
+                    {
+                        "description": "创建权限请求参数",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.CreatePermissionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "创建成功",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/handle.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/dto.PermissionResponse"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "参数错误",
+                        "schema": {
+                            "$ref": "#/definitions/handle.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/permission/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "根据权限ID获取权限详情",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "权限管理"
+                ],
+                "summary": "获取权限详情",
                 "parameters": [
                     {
                         "type": "integer",
-                        "description": "媒体配置ID",
+                        "description": "权限ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/handle.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/dto.PermissionResponse"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "权限不存在",
+                        "schema": {
+                            "$ref": "#/definitions/handle.Response"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "更新权限信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "权限管理"
+                ],
+                "summary": "更新权限",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "权限ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "更新权限请求参数",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.CreatePermissionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "更新成功",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/handle.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/dto.PermissionResponse"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "参数错误",
+                        "schema": {
+                            "$ref": "#/definitions/handle.Response"
+                        }
+                    },
+                    "404": {
+                        "description": "权限不存在",
+                        "schema": {
+                            "$ref": "#/definitions/handle.Response"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "删除权限",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "权限管理"
+                ],
+                "summary": "删除权限",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "权限ID",
                         "name": "id",
                         "in": "path",
                         "required": true
@@ -364,6 +380,162 @@
                             "$ref": "#/definitions/handle.Response"
                         }
                     },
+                    "404": {
+                        "description": "权限不存在",
+                        "schema": {
+                            "$ref": "#/definitions/handle.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/refresh": {
+            "post": {
+                "description": "使用刷新token获取新的访问token",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "基础接口"
+                ],
+                "summary": "刷新token",
+                "parameters": [
+                    {
+                        "description": "刷新token请求参数",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.RefreshTokenRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "刷新成功",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/handle.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/dto.LoginResponse"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "参数错误",
+                        "schema": {
+                            "$ref": "#/definitions/handle.Response"
+                        }
+                    },
+                    "401": {
+                        "description": "刷新token无效",
+                        "schema": {
+                            "$ref": "#/definitions/handle.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/role": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "获取所有角色列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "角色管理"
+                ],
+                "summary": "获取角色列表",
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/handle.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/dto.RoleResponse"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "创建新角色",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "角色管理"
+                ],
+                "summary": "创建角色",
+                "parameters": [
+                    {
+                        "description": "创建角色请求参数",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.CreateRoleRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "创建成功",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/handle.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/dto.RoleResponse"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
                     "400": {
                         "description": "参数错误",
                         "schema": {
@@ -373,9 +545,14 @@
                 }
             }
         },
-        "/mainModule/getMediaConfig/{id}": {
+        "/role/{id}": {
             "get": {
-                "description": "根据ID获取媒体配置的详细信息",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "根据角色ID获取角色详情",
                 "consumes": [
                     "application/json"
                 ],
@@ -383,13 +560,13 @@
                     "application/json"
                 ],
                 "tags": [
-                    "媒体配置"
+                    "角色管理"
                 ],
-                "summary": "获取媒体配置详情",
+                "summary": "获取角色详情",
                 "parameters": [
                     {
                         "type": "integer",
-                        "description": "媒体配置ID",
+                        "description": "角色ID",
                         "name": "id",
                         "in": "path",
                         "required": true
@@ -407,7 +584,69 @@
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/model.MediaConfig"
+                                            "$ref": "#/definitions/dto.RoleResponse"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "角色不存在",
+                        "schema": {
+                            "$ref": "#/definitions/handle.Response"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "更新角色信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "角色管理"
+                ],
+                "summary": "更新角色",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "角色ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "更新角色请求参数",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.UpdateRoleRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "更新成功",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/handle.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/dto.RoleResponse"
                                         }
                                     }
                                 }
@@ -419,13 +658,22 @@
                         "schema": {
                             "$ref": "#/definitions/handle.Response"
                         }
+                    },
+                    "404": {
+                        "description": "角色不存在",
+                        "schema": {
+                            "$ref": "#/definitions/handle.Response"
+                        }
                     }
                 }
-            }
-        },
-        "/mainModule/getMediaConfigPage": {
-            "get": {
-                "description": "分页获取媒体配置列表",
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "删除角色",
                 "consumes": [
                     "application/json"
                 ],
@@ -433,9 +681,52 @@
                     "application/json"
                 ],
                 "tags": [
-                    "媒体配置"
+                    "角色管理"
                 ],
-                "summary": "分页获取媒体配置",
+                "summary": "删除角色",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "角色ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "删除成功",
+                        "schema": {
+                            "$ref": "#/definitions/handle.Response"
+                        }
+                    },
+                    "404": {
+                        "description": "角色不存在",
+                        "schema": {
+                            "$ref": "#/definitions/handle.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/user": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "分页获取用户列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "用户管理"
+                ],
+                "summary": "获取用户列表",
                 "parameters": [
                     {
                         "type": "integer",
@@ -448,7 +739,19 @@
                         "type": "integer",
                         "default": 10,
                         "description": "每页数量",
-                        "name": "pageSize",
+                        "name": "page_size",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "用户名（模糊搜索）",
+                        "name": "username",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "状态筛选",
+                        "name": "status",
                         "in": "query"
                     }
                 ],
@@ -464,30 +767,22 @@
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/dto.MediaConfigPageResponse"
+                                            "$ref": "#/definitions/dto.UserListResponse"
                                         }
                                     }
                                 }
                             ]
                         }
-                    },
-                    "400": {
-                        "description": "参数错误",
-                        "schema": {
-                            "$ref": "#/definitions/handle.Response"
-                        }
                     }
                 }
-            }
-        },
-        "/mainModule/saveMediaConfig": {
+            },
             "post": {
                 "security": [
                     {
                         "BearerAuth": []
                     }
                 ],
-                "description": "保存新的媒体配置信息",
+                "description": "创建新用户",
                 "consumes": [
                     "application/json"
                 ],
@@ -495,23 +790,23 @@
                     "application/json"
                 ],
                 "tags": [
-                    "媒体配置"
+                    "用户管理"
                 ],
-                "summary": "保存媒体配置",
+                "summary": "创建用户",
                 "parameters": [
                     {
-                        "description": "媒体配置信息",
+                        "description": "创建用户请求参数",
                         "name": "request",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/dto.SaveMediaConfigRequest"
+                            "$ref": "#/definitions/dto.CreateUserRequest"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "保存成功",
+                        "description": "创建成功",
                         "schema": {
                             "allOf": [
                                 {
@@ -521,7 +816,7 @@
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/model.MediaConfig"
+                                            "$ref": "#/definitions/dto.UserResponse"
                                         }
                                     }
                                 }
@@ -533,24 +828,18 @@
                         "schema": {
                             "$ref": "#/definitions/handle.Response"
                         }
-                    },
-                    "401": {
-                        "description": "未授权",
-                        "schema": {
-                            "$ref": "#/definitions/handle.Response"
-                        }
                     }
                 }
             }
         },
-        "/mainModule/updateMediaConfig": {
+        "/user/change-password": {
             "post": {
                 "security": [
                     {
                         "BearerAuth": []
                     }
                 ],
-                "description": "更新已有的媒体配置信息",
+                "description": "修改当前用户密码",
                 "consumes": [
                     "application/json"
                 ],
@@ -558,37 +847,25 @@
                     "application/json"
                 ],
                 "tags": [
-                    "媒体配置"
+                    "用户管理"
                 ],
-                "summary": "更新媒体配置",
+                "summary": "修改密码",
                 "parameters": [
                     {
-                        "description": "媒体配置更新信息",
+                        "description": "修改密码请求参数",
                         "name": "request",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/dto.UpdateMediaConfigRequest"
+                            "$ref": "#/definitions/dto.ChangePasswordRequest"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "更新成功",
+                        "description": "修改成功",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/handle.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/model.MediaConfig"
-                                        }
-                                    }
-                                }
-                            ]
+                            "$ref": "#/definitions/handle.Response"
                         }
                     },
                     "400": {
@@ -596,19 +873,18 @@
                         "schema": {
                             "$ref": "#/definitions/handle.Response"
                         }
-                    },
-                    "401": {
-                        "description": "未授权",
-                        "schema": {
-                            "$ref": "#/definitions/handle.Response"
-                        }
                     }
                 }
             }
         },
-        "/modelsInfo/getModelsInfo/{id}": {
+        "/user/{id}": {
             "get": {
-                "description": "根据模型ID获取详细信息",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "根据用户ID获取用户详情",
                 "consumes": [
                     "application/json"
                 ],
@@ -616,13 +892,13 @@
                     "application/json"
                 ],
                 "tags": [
-                    "模型信息"
+                    "用户管理"
                 ],
-                "summary": "根据ID获取模型信息",
+                "summary": "获取用户详情",
                 "parameters": [
                     {
                         "type": "integer",
-                        "description": "模型ID",
+                        "description": "用户ID",
                         "name": "id",
                         "in": "path",
                         "required": true
@@ -640,25 +916,28 @@
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/dto.ModelsInfoResponse"
+                                            "$ref": "#/definitions/dto.UserResponse"
                                         }
                                     }
                                 }
                             ]
                         }
                     },
-                    "400": {
-                        "description": "参数错误",
+                    "404": {
+                        "description": "用户不存在",
                         "schema": {
                             "$ref": "#/definitions/handle.Response"
                         }
                     }
                 }
-            }
-        },
-        "/modelsInfo/getModelsInfoAll": {
-            "get": {
-                "description": "获取系统中所有的模型信息列表",
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "更新用户信息",
                 "consumes": [
                     "application/json"
                 ],
@@ -666,67 +945,30 @@
                     "application/json"
                 ],
                 "tags": [
-                    "模型信息"
+                    "用户管理"
                 ],
-                "summary": "获取所有模型信息",
-                "responses": {
-                    "200": {
-                        "description": "获取成功",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/handle.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/definitions/dto.ModelsInfoResponse"
-                                            }
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "获取失败",
-                        "schema": {
-                            "$ref": "#/definitions/handle.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/modelsInfo/saveModelsInfo": {
-            "post": {
-                "description": "保存新的模型信息",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "模型信息"
-                ],
-                "summary": "保存模型信息",
+                "summary": "更新用户",
                 "parameters": [
                     {
-                        "description": "模型信息",
+                        "type": "integer",
+                        "description": "用户ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "更新用户请求参数",
                         "name": "request",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/dto.SaveModelsInfoRequest"
+                            "$ref": "#/definitions/dto.UpdateUserRequest"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "保存成功",
+                        "description": "更新成功",
                         "schema": {
                             "allOf": [
                                 {
@@ -736,7 +978,7 @@
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/model.ModelsInfo"
+                                            "$ref": "#/definitions/dto.UserResponse"
                                         }
                                     }
                                 }
@@ -748,13 +990,22 @@
                         "schema": {
                             "$ref": "#/definitions/handle.Response"
                         }
+                    },
+                    "404": {
+                        "description": "用户不存在",
+                        "schema": {
+                            "$ref": "#/definitions/handle.Response"
+                        }
                     }
                 }
-            }
-        },
-        "/networkConfig/getNetworkConfig/{device}": {
-            "get": {
-                "description": "根据设备名称获取指定网络接口的配置信息",
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "删除用户",
                 "consumes": [
                     "application/json"
                 ],
@@ -762,395 +1013,27 @@
                     "application/json"
                 ],
                 "tags": [
-                    "网络配置"
+                    "用户管理"
                 ],
-                "summary": "获取网络接口配置",
+                "summary": "删除用户",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "网络设备名称",
-                        "name": "device",
+                        "type": "integer",
+                        "description": "用户ID",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "获取成功",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/handle.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/dto.NetworkConfigResponse"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "参数错误",
+                        "description": "删除成功",
                         "schema": {
                             "$ref": "#/definitions/handle.Response"
                         }
-                    }
-                }
-            }
-        },
-        "/networkConfig/getNetworkInterfaces": {
-            "get": {
-                "description": "获取系统中所有网络接口的配置信息列表",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "网络配置"
-                ],
-                "summary": "获取所有网络接口",
-                "responses": {
-                    "200": {
-                        "description": "获取成功",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/handle.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/definitions/dto.NetworkConfigResponse"
-                                            }
-                                        }
-                                    }
-                                }
-                            ]
-                        }
                     },
-                    "400": {
-                        "description": "获取失败",
-                        "schema": {
-                            "$ref": "#/definitions/handle.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/paramConf/saveParamConf": {
-            "post": {
-                "description": "保存新的参数配置信息",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "参数配置"
-                ],
-                "summary": "保存参数配置",
-                "parameters": [
-                    {
-                        "description": "参数配置信息",
-                        "name": "request",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/dto.SaveParamConfRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "保存成功",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/handle.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/model.ParamConf"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "参数错误",
-                        "schema": {
-                            "$ref": "#/definitions/handle.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/planTemplate/savePlanTemplate": {
-            "post": {
-                "description": "保存新的计划模板信息",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "计划模板"
-                ],
-                "summary": "保存计划模板",
-                "parameters": [
-                    {
-                        "description": "计划模板信息",
-                        "name": "request",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/dto.SavePlanTemplateRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "保存成功",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/handle.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/model.PlanTemplate"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "参数错误",
-                        "schema": {
-                            "$ref": "#/definitions/handle.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/planTemplate/updatePlanTemplate": {
-            "post": {
-                "description": "更新已有的计划模板信息",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "计划模板"
-                ],
-                "summary": "更新计划模板",
-                "parameters": [
-                    {
-                        "description": "计划模板更新信息",
-                        "name": "request",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/dto.UpdatePlanTemplateRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "更新成功",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/handle.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/model.PlanTemplate"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "参数错误",
-                        "schema": {
-                            "$ref": "#/definitions/handle.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/taskManage/saveTaskManage": {
-            "post": {
-                "description": "保存新的任务管理信息",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "任务管理"
-                ],
-                "summary": "保存任务管理",
-                "parameters": [
-                    {
-                        "description": "任务管理信息",
-                        "name": "request",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/dto.SaveTaskManageRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "保存成功",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/handle.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/model.TaskManage"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "参数错误",
-                        "schema": {
-                            "$ref": "#/definitions/handle.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/taskManage/updateTaskManage": {
-            "post": {
-                "description": "更新已有的任务管理信息",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "任务管理"
-                ],
-                "summary": "更新任务管理",
-                "parameters": [
-                    {
-                        "description": "任务管理更新信息",
-                        "name": "request",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/dto.UpdateTaskManageRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "更新成功",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/handle.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/model.TaskManage"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "参数错误",
-                        "schema": {
-                            "$ref": "#/definitions/handle.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/thresholdConf/saveThresholdConf": {
-            "post": {
-                "description": "保存新的阈值配置信息",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "阈值配置"
-                ],
-                "summary": "保存阈值配置",
-                "parameters": [
-                    {
-                        "description": "阈值配置信息",
-                        "name": "request",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/dto.SaveThresholdConfRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "保存成功",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/handle.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/model.ThresholdConf"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "参数错误",
+                    "404": {
+                        "description": "用户不存在",
                         "schema": {
                             "$ref": "#/definitions/handle.Response"
                         }
@@ -1160,6 +1043,151 @@
         }
     },
     "definitions": {
+        "dto.ChangePasswordRequest": {
+            "type": "object",
+            "required": [
+                "new_password",
+                "old_password"
+            ],
+            "properties": {
+                "new_password": {
+                    "description": "新密码",
+                    "type": "string"
+                },
+                "old_password": {
+                    "description": "旧密码",
+                    "type": "string"
+                }
+            }
+        },
+        "dto.CreatePermissionRequest": {
+            "type": "object",
+            "required": [
+                "code",
+                "name",
+                "type"
+            ],
+            "properties": {
+                "code": {
+                    "description": "权限编码",
+                    "type": "string"
+                },
+                "component": {
+                    "description": "组件路径",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "权限描述",
+                    "type": "string"
+                },
+                "icon": {
+                    "description": "图标",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "权限名称",
+                    "type": "string"
+                },
+                "parent_id": {
+                    "description": "父级ID",
+                    "type": "integer"
+                },
+                "path": {
+                    "description": "路由路径",
+                    "type": "string"
+                },
+                "sort": {
+                    "description": "排序",
+                    "type": "integer"
+                },
+                "status": {
+                    "description": "状态：0-禁用，1-启用",
+                    "type": "integer"
+                },
+                "type": {
+                    "description": "权限类型：menu-菜单，button-按钮，api-接口",
+                    "type": "string"
+                }
+            }
+        },
+        "dto.CreateRoleRequest": {
+            "type": "object",
+            "required": [
+                "code",
+                "name"
+            ],
+            "properties": {
+                "code": {
+                    "description": "角色编码",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "角色描述",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "角色名称",
+                    "type": "string"
+                },
+                "sort": {
+                    "description": "排序",
+                    "type": "integer"
+                },
+                "status": {
+                    "description": "状态：0-禁用，1-启用",
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.CreateUserRequest": {
+            "type": "object",
+            "required": [
+                "password",
+                "user_id",
+                "username"
+            ],
+            "properties": {
+                "avatar": {
+                    "description": "头像",
+                    "type": "string"
+                },
+                "email": {
+                    "description": "邮箱",
+                    "type": "string"
+                },
+                "password": {
+                    "description": "密码",
+                    "type": "string"
+                },
+                "phone": {
+                    "description": "手机号",
+                    "type": "string"
+                },
+                "remark": {
+                    "description": "备注",
+                    "type": "string"
+                },
+                "role_ids": {
+                    "description": "角色ID列表",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "status": {
+                    "description": "状态：0-禁用，1-启用",
+                    "type": "integer"
+                },
+                "user_id": {
+                    "description": "用户ID",
+                    "type": "string"
+                },
+                "username": {
+                    "description": "用户名",
+                    "type": "string"
+                }
+            }
+        },
         "dto.LoginRequest": {
             "type": "object",
             "required": [
@@ -1182,10 +1210,20 @@
         "dto.LoginResponse": {
             "type": "object",
             "properties": {
-                "token": {
-                    "description": "用户token",
+                "expires_in": {
+                    "description": "token过期时间（秒）",
+                    "type": "integer",
+                    "example": 86400
+                },
+                "refresh_token": {
+                    "description": "刷新token",
                     "type": "string",
-                    "example": "abc123"
+                    "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                },
+                "token": {
+                    "description": "访问token",
+                    "type": "string",
+                    "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
                 }
             }
         },
@@ -1202,579 +1240,275 @@
                 }
             }
         },
-        "dto.MediaConfigPageResponse": {
+        "dto.PermissionResponse": {
+            "type": "object",
+            "properties": {
+                "children": {
+                    "description": "子权限",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.PermissionResponse"
+                    }
+                },
+                "code": {
+                    "description": "权限编码",
+                    "type": "string"
+                },
+                "component": {
+                    "description": "组件路径",
+                    "type": "string"
+                },
+                "created_at": {
+                    "description": "创建时间",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "权限描述",
+                    "type": "string"
+                },
+                "icon": {
+                    "description": "图标",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "权限ID",
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "权限名称",
+                    "type": "string"
+                },
+                "parent_id": {
+                    "description": "父级ID",
+                    "type": "integer"
+                },
+                "path": {
+                    "description": "路由路径",
+                    "type": "string"
+                },
+                "sort": {
+                    "description": "排序",
+                    "type": "integer"
+                },
+                "status": {
+                    "description": "状态",
+                    "type": "integer"
+                },
+                "type": {
+                    "description": "权限类型",
+                    "type": "string"
+                },
+                "updated_at": {
+                    "description": "更新时间",
+                    "type": "string"
+                }
+            }
+        },
+        "dto.RefreshTokenRequest": {
+            "type": "object",
+            "required": [
+                "refresh_token"
+            ],
+            "properties": {
+                "refresh_token": {
+                    "description": "刷新token",
+                    "type": "string",
+                    "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                }
+            }
+        },
+        "dto.RoleResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "角色编码",
+                    "type": "string"
+                },
+                "created_at": {
+                    "description": "创建时间",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "角色描述",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "角色ID",
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "角色名称",
+                    "type": "string"
+                },
+                "sort": {
+                    "description": "排序",
+                    "type": "integer"
+                },
+                "status": {
+                    "description": "状态：0-禁用，1-启用",
+                    "type": "integer"
+                },
+                "updated_at": {
+                    "description": "更新时间",
+                    "type": "string"
+                }
+            }
+        },
+        "dto.UpdateRoleRequest": {
+            "type": "object",
+            "required": [
+                "code",
+                "id",
+                "name"
+            ],
+            "properties": {
+                "code": {
+                    "description": "角色编码",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "角色描述",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "角色ID",
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "角色名称",
+                    "type": "string"
+                },
+                "sort": {
+                    "description": "排序",
+                    "type": "integer"
+                },
+                "status": {
+                    "description": "状态：0-禁用，1-启用",
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.UpdateUserRequest": {
+            "type": "object",
+            "required": [
+                "id",
+                "user_id",
+                "username"
+            ],
+            "properties": {
+                "avatar": {
+                    "description": "头像",
+                    "type": "string"
+                },
+                "email": {
+                    "description": "邮箱",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "用户ID",
+                    "type": "integer"
+                },
+                "phone": {
+                    "description": "手机号",
+                    "type": "string"
+                },
+                "remark": {
+                    "description": "备注",
+                    "type": "string"
+                },
+                "role_ids": {
+                    "description": "角色ID列表",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "status": {
+                    "description": "状态：0-禁用，1-启用",
+                    "type": "integer"
+                },
+                "user_id": {
+                    "description": "用户ID",
+                    "type": "string"
+                },
+                "username": {
+                    "description": "用户名",
+                    "type": "string"
+                }
+            }
+        },
+        "dto.UserListResponse": {
             "type": "object",
             "properties": {
                 "list": {
+                    "description": "用户列表",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/dto.MediaConfigResponse"
+                        "$ref": "#/definitions/dto.UserResponse"
                     }
                 },
                 "total": {
+                    "description": "总数",
                     "type": "integer"
                 }
             }
         },
-        "dto.MediaConfigResponse": {
+        "dto.UserResponse": {
             "type": "object",
             "properties": {
-                "code": {
+                "avatar": {
+                    "description": "头像",
+                    "type": "string"
+                },
+                "created_at": {
+                    "description": "创建时间",
+                    "type": "string"
+                },
+                "email": {
+                    "description": "邮箱",
                     "type": "string"
                 },
                 "id": {
+                    "description": "用户ID",
                     "type": "integer"
                 },
-                "media_desc": {
+                "last_login": {
+                    "description": "最后登录时间",
                     "type": "string"
                 },
-                "name": {
+                "login_count": {
+                    "description": "登录次数",
+                    "type": "integer"
+                },
+                "phone": {
+                    "description": "手机号",
                     "type": "string"
+                },
+                "remark": {
+                    "description": "备注",
+                    "type": "string"
+                },
+                "roles": {
+                    "description": "角色列表",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 },
                 "status": {
-                    "type": "string"
-                },
-                "type": {
-                    "type": "string"
-                },
-                "url": {
-                    "type": "string"
-                }
-            }
-        },
-        "dto.ModelsInfoResponse": {
-            "type": "object",
-            "properties": {
-                "algorithm": {
-                    "description": "算法",
-                    "type": "string"
-                },
-                "classify": {
-                    "description": "分类",
-                    "type": "string"
-                },
-                "date_time": {
-                    "description": "日期时间",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "描述",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "模型ID",
+                    "description": "状态：0-禁用，1-启用",
                     "type": "integer"
                 },
-                "name": {
-                    "description": "模型名称",
+                "updated_at": {
+                    "description": "更新时间",
                     "type": "string"
                 },
-                "sophon_type": {
-                    "description": "Sophon类型",
-                    "type": "integer"
-                },
-                "specialty": {
-                    "description": "专业性",
-                    "type": "integer"
-                }
-            }
-        },
-        "dto.NetworkConfigResponse": {
-            "type": "object",
-            "properties": {
-                "bandwidth": {
-                    "description": "带宽，如\"100Mb/s\"",
+                "user_id": {
+                    "description": "用户ID",
                     "type": "string"
                 },
-                "bandwidth_varity": {
-                    "description": "带宽变化",
-                    "type": "boolean"
-                },
-                "device": {
-                    "description": "网络设备，如\"eth0\"",
-                    "type": "string"
-                },
-                "dns": {
-                    "description": "DNS服务器",
-                    "type": "string"
-                },
-                "gateway": {
-                    "description": "网关地址",
-                    "type": "string"
-                },
-                "ip": {
-                    "description": "IP地址",
-                    "type": "string"
-                },
-                "mac": {
-                    "description": "MAC地址",
-                    "type": "string"
-                },
-                "netmask": {
-                    "description": "子网掩码",
-                    "type": "string"
-                },
-                "status": {
-                    "description": "网络状态：static/dynamic",
-                    "type": "string"
-                }
-            }
-        },
-        "dto.SaveAlarmCategoryRequest": {
-            "type": "object",
-            "required": [
-                "alarm_type",
-                "arithmetic"
-            ],
-            "properties": {
-                "alarm_desc": {
-                    "description": "告警描述",
-                    "type": "string"
-                },
-                "alarm_type": {
-                    "description": "告警类别",
-                    "type": "string"
-                },
-                "arithmetic": {
-                    "description": "所属算法",
-                    "type": "string"
-                },
-                "audio_file": {
-                    "description": "语音文件",
-                    "type": "string"
-                },
-                "sophon_type": {
-                    "description": "Sophon类型",
-                    "type": "integer"
-                }
-            }
-        },
-        "dto.SaveAlarmManageRequest": {
-            "type": "object",
-            "required": [
-                "alarm_task"
-            ],
-            "properties": {
-                "alarm_detail": {
-                    "type": "string"
-                },
-                "alarm_task": {
-                    "type": "string"
-                },
-                "alarm_type": {
-                    "type": "string"
-                },
-                "alarm_video": {
-                    "type": "string"
-                },
-                "img": {
-                    "type": "string"
-                },
-                "init_img": {
-                    "type": "string"
-                },
-                "media_id": {
-                    "type": "integer"
-                },
-                "media_url": {
-                    "type": "string"
-                },
-                "report_addr": {
-                    "type": "string"
-                },
-                "report_status": {
-                    "type": "integer"
-                },
-                "tm": {
-                    "type": "string"
-                },
-                "video_media": {
-                    "type": "string"
-                }
-            }
-        },
-        "dto.SaveDeviceListRequest": {
-            "type": "object",
-            "required": [
-                "ip_address"
-            ],
-            "properties": {
-                "face_device": {
-                    "description": "是否为人脸设备",
-                    "type": "integer"
-                },
-                "ip_address": {
-                    "description": "IP地址",
-                    "type": "string"
-                },
-                "last_used_tm": {
-                    "description": "最后使用时间",
-                    "type": "string"
-                },
-                "status": {
-                    "description": "设备状态",
-                    "type": "integer"
-                }
-            }
-        },
-        "dto.SaveMediaConfigRequest": {
-            "type": "object",
-            "required": [
-                "name",
-                "url"
-            ],
-            "properties": {
-                "code": {
-                    "description": "编码",
-                    "type": "string",
-                    "example": "CAM001"
-                },
-                "media_desc": {
-                    "description": "媒体描述",
-                    "type": "string",
-                    "example": "前门摄像头"
-                },
-                "name": {
-                    "description": "媒体名称",
-                    "type": "string",
-                    "example": "摄像头1"
-                },
-                "status": {
-                    "description": "状态",
-                    "type": "string",
-                    "example": "active"
-                },
-                "type": {
-                    "description": "类型",
-                    "type": "string",
-                    "example": "camera"
-                },
-                "url": {
-                    "description": "媒体URL",
-                    "type": "string",
-                    "example": "rtsp://..."
-                }
-            }
-        },
-        "dto.SaveModelsInfoRequest": {
-            "type": "object",
-            "required": [
-                "algorithm",
-                "name"
-            ],
-            "properties": {
-                "algorithm": {
-                    "description": "算法",
-                    "type": "string",
-                    "example": "face_detection"
-                },
-                "classify": {
-                    "description": "分类",
-                    "type": "string",
-                    "example": "人脸识别"
-                },
-                "date_time": {
-                    "description": "日期时间",
-                    "type": "string",
-                    "example": "2024-01-01 12:00:00"
-                },
-                "description": {
-                    "description": "描述",
-                    "type": "string",
-                    "example": "用于人脸识别的深度学习模型"
-                },
-                "name": {
-                    "description": "模型名称",
-                    "type": "string",
-                    "example": "人脸识别模型"
-                },
-                "sophon_type": {
-                    "description": "Sophon类型",
-                    "type": "integer",
-                    "example": 1
-                },
-                "specialty": {
-                    "description": "专业性",
-                    "type": "integer",
-                    "example": 1
-                }
-            }
-        },
-        "dto.SaveParamConfRequest": {
-            "type": "object",
-            "required": [
-                "key",
-                "param"
-            ],
-            "properties": {
-                "key": {
-                    "description": "配置键",
-                    "type": "string"
-                },
-                "param": {
-                    "description": "参数名称",
-                    "type": "string"
-                },
-                "param_value": {
-                    "description": "参数值",
-                    "type": "string"
-                }
-            }
-        },
-        "dto.SavePlanTemplateRequest": {
-            "type": "object",
-            "required": [
-                "name",
-                "plan"
-            ],
-            "properties": {
-                "name": {
-                    "type": "string"
-                },
-                "plan": {
-                    "type": "string"
-                }
-            }
-        },
-        "dto.SaveTaskManageRequest": {
-            "type": "object",
-            "required": [
-                "name"
-            ],
-            "properties": {
-                "alarm_interval": {
-                    "type": "integer",
-                    "example": 30
-                },
-                "arit_params": {
-                    "type": "string",
-                    "example": "{\"threshold\":0.8}"
-                },
-                "arithmetic_config": {
-                    "type": "string",
-                    "example": "人脸识别+行为分析"
-                },
-                "media_id": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "media_source": {
-                    "type": "string",
-                    "example": "rtsp://192.168.1.100/stream"
-                },
-                "name": {
-                    "type": "string",
-                    "example": "监控任务1"
-                },
-                "plan_id": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "report_addr": {
-                    "type": "string",
-                    "example": "http://192.168.1.200/api/alarm"
-                },
-                "sophon_types": {
-                    "type": "string",
-                    "example": "1,2,3"
-                },
-                "status_desc": {
-                    "type": "string",
-                    "example": "运行中"
-                },
-                "task_status": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "used_ip": {
-                    "type": "string",
-                    "example": "192.168.1.100"
-                },
-                "work_plan": {
-                    "type": "string",
-                    "example": "全天候监控"
-                }
-            }
-        },
-        "dto.SaveThresholdConfRequest": {
-            "type": "object",
-            "required": [
-                "param_desc"
-            ],
-            "properties": {
-                "param_desc": {
-                    "description": "参数描述",
-                    "type": "string"
-                },
-                "param_value": {
-                    "description": "参数值",
-                    "type": "number"
-                },
-                "sophon_type": {
-                    "description": "Sophon类型",
-                    "type": "integer"
-                }
-            }
-        },
-        "dto.UpdateAlarmManageRequest": {
-            "type": "object",
-            "required": [
-                "alarm_task",
-                "id"
-            ],
-            "properties": {
-                "alarm_detail": {
-                    "type": "string"
-                },
-                "alarm_task": {
-                    "type": "string"
-                },
-                "alarm_type": {
-                    "type": "string"
-                },
-                "alarm_video": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "img": {
-                    "type": "string"
-                },
-                "init_img": {
-                    "type": "string"
-                },
-                "media_id": {
-                    "type": "integer"
-                },
-                "media_url": {
-                    "type": "string"
-                },
-                "report_addr": {
-                    "type": "string"
-                },
-                "report_status": {
-                    "type": "integer"
-                },
-                "tm": {
-                    "type": "string"
-                },
-                "video_media": {
-                    "type": "string"
-                }
-            }
-        },
-        "dto.UpdateMediaConfigRequest": {
-            "type": "object",
-            "required": [
-                "id",
-                "name",
-                "url"
-            ],
-            "properties": {
-                "code": {
-                    "description": "编码",
-                    "type": "string",
-                    "example": "CAM001"
-                },
-                "id": {
-                    "description": "媒体配置ID",
-                    "type": "integer",
-                    "example": 1
-                },
-                "media_desc": {
-                    "description": "媒体描述",
-                    "type": "string",
-                    "example": "前门摄像头"
-                },
-                "name": {
-                    "description": "媒体名称",
-                    "type": "string",
-                    "example": "摄像头1"
-                },
-                "status": {
-                    "description": "状态",
-                    "type": "string",
-                    "example": "active"
-                },
-                "type": {
-                    "description": "类型",
-                    "type": "string",
-                    "example": "camera"
-                },
-                "url": {
-                    "description": "媒体URL",
-                    "type": "string",
-                    "example": "rtsp://..."
-                }
-            }
-        },
-        "dto.UpdatePlanTemplateRequest": {
-            "type": "object",
-            "required": [
-                "id",
-                "name",
-                "plan"
-            ],
-            "properties": {
-                "id": {
-                    "type": "integer"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "plan": {
-                    "type": "string"
-                }
-            }
-        },
-        "dto.UpdateTaskManageRequest": {
-            "type": "object",
-            "required": [
-                "id",
-                "name"
-            ],
-            "properties": {
-                "alarm_interval": {
-                    "type": "integer"
-                },
-                "arit_params": {
-                    "type": "string"
-                },
-                "arithmetic_config": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "media_id": {
-                    "type": "integer"
-                },
-                "media_source": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "plan_id": {
-                    "type": "integer"
-                },
-                "report_addr": {
-                    "type": "string"
-                },
-                "sophon_types": {
-                    "type": "string"
-                },
-                "status_desc": {
-                    "type": "string"
-                },
-                "task_status": {
-                    "type": "integer"
-                },
-                "used_ip": {
-                    "type": "string"
-                },
-                "work_plan": {
+                "username": {
+                    "description": "用户名",
                     "type": "string"
                 }
             }
@@ -1782,12 +1516,12 @@
         "handle.Response": {
             "type": "object",
             "properties": {
-                "code": {
+                "errCode": {
                     "description": "响应码，0表示成功",
                     "type": "integer",
                     "example": 0
                 },
-                "msg": {
+                "errMsg": {
                     "description": "响应消息",
                     "type": "string",
                     "example": "ok"
@@ -1795,266 +1529,6 @@
                 "result": {
                     "description": "响应数据",
                     "type": "object"
-                }
-            }
-        },
-        "model.AlarmCategory": {
-            "type": "object",
-            "properties": {
-                "alarm_desc": {
-                    "description": "告警描述",
-                    "type": "string"
-                },
-                "alarm_type": {
-                    "description": "告警类别",
-                    "type": "string"
-                },
-                "arithmetic": {
-                    "description": "所属算法",
-                    "type": "string"
-                },
-                "audio_file": {
-                    "description": "语音文件",
-                    "type": "string"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "sophon_type": {
-                    "description": "Sophon类型",
-                    "type": "integer"
-                }
-            }
-        },
-        "model.AlarmManage": {
-            "type": "object",
-            "properties": {
-                "alarm_detail": {
-                    "type": "string"
-                },
-                "alarm_task": {
-                    "type": "string"
-                },
-                "alarm_type": {
-                    "type": "string"
-                },
-                "alarm_video": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "img": {
-                    "type": "string"
-                },
-                "init_img": {
-                    "description": "原图",
-                    "type": "string"
-                },
-                "media_id": {
-                    "type": "integer"
-                },
-                "media_url": {
-                    "type": "string"
-                },
-                "report_addr": {
-                    "type": "string"
-                },
-                "report_status": {
-                    "type": "integer"
-                },
-                "tm": {
-                    "type": "string"
-                },
-                "video_media": {
-                    "type": "string"
-                }
-            }
-        },
-        "model.DeviceList": {
-            "type": "object",
-            "properties": {
-                "face_device": {
-                    "description": "是否为人脸设备：0否，1是",
-                    "type": "integer"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "ip_address": {
-                    "description": "IP地址",
-                    "type": "string"
-                },
-                "last_used_tm": {
-                    "description": "最后使用时间",
-                    "type": "string"
-                },
-                "status": {
-                    "description": "设备状态：0离线，1在线",
-                    "type": "integer"
-                }
-            }
-        },
-        "model.MediaConfig": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "media_desc": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "status": {
-                    "type": "string"
-                },
-                "type": {
-                    "type": "string"
-                },
-                "url": {
-                    "type": "string"
-                }
-            }
-        },
-        "model.ModelsInfo": {
-            "type": "object",
-            "properties": {
-                "algorithm": {
-                    "description": "算法",
-                    "type": "string"
-                },
-                "classify": {
-                    "description": "分类",
-                    "type": "string"
-                },
-                "date_time": {
-                    "description": "日期时间",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "描述",
-                    "type": "string"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "name": {
-                    "description": "模型名称",
-                    "type": "string"
-                },
-                "sophon_type": {
-                    "description": "Sophon类型",
-                    "type": "integer"
-                },
-                "specialty": {
-                    "description": "专业性",
-                    "type": "integer"
-                }
-            }
-        },
-        "model.ParamConf": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer"
-                },
-                "key": {
-                    "description": "配置键",
-                    "type": "string"
-                },
-                "param": {
-                    "description": "参数名称",
-                    "type": "string"
-                },
-                "param_value": {
-                    "description": "参数值",
-                    "type": "string"
-                }
-            }
-        },
-        "model.PlanTemplate": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "plan": {
-                    "type": "string"
-                }
-            }
-        },
-        "model.TaskManage": {
-            "type": "object",
-            "properties": {
-                "alarm_interval": {
-                    "type": "integer"
-                },
-                "arit_params": {
-                    "type": "string"
-                },
-                "arithmetic_config": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "media_id": {
-                    "type": "integer"
-                },
-                "media_source": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "plan_id": {
-                    "type": "integer"
-                },
-                "report_addr": {
-                    "type": "string"
-                },
-                "sophon_types": {
-                    "type": "string"
-                },
-                "status_desc": {
-                    "type": "string"
-                },
-                "task_status": {
-                    "type": "integer"
-                },
-                "used_ip": {
-                    "type": "string"
-                },
-                "work_plan": {
-                    "type": "string"
-                }
-            }
-        },
-        "model.ThresholdConf": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer"
-                },
-                "param_desc": {
-                    "description": "参数描述",
-                    "type": "string"
-                },
-                "param_value": {
-                    "description": "参数值",
-                    "type": "number"
-                },
-                "sophon_type": {
-                    "description": "Sophon类型",
-                    "type": "integer"
                 }
             }
         }

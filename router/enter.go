@@ -1,7 +1,7 @@
 package router
 
 import (
-	"feishuReboot/router/system"
+	"go-web-template/router/system"
 )
 
 type Group struct {

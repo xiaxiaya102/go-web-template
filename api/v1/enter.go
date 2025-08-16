@@ -1,7 +1,7 @@
 package v1
 
 import (
-	"feishuReboot/api/v1/system"
+	"go-web-template/api/v1/system"
 )
 
 type ApiGroup struct {

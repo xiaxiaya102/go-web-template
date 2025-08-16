@@ -1,22 +1,22 @@
 package main
 
 import (
-	"feishuReboot/initialization"
-	"feishuReboot/logger"
+	"go-web-template/initialization"
+	"go-web-template/logger"
 	"time"
 )
 
-// @title           Daily News Reboot API
+// @title           Go Web Admin API
 // @version         1.0
-// @description     This is a daily news reboot server API documentation.
+// @description     Go Web后台管理框架API文档
 // @termsOfService  http://swagger.io/terms/
 
 // @contact.name   API Support
 // @contact.url    http://www.swagger.io/support
 // @contact.email  support@swagger.io
 
-// @license.name  Apache 2.0
-// @license.url   http://www.apache.org/licenses/LICENSE-2.0.html
+// @license.name  MIT
+// @license.url   https://opensource.org/licenses/MIT
 
 // @host      localhost:8089
 // @BasePath  /api

@@ -1,5 +1,111 @@
 basePath: /api
 definitions:
+  dto.ChangePasswordRequest:
+    properties:
+      new_password:
+        description: 新密码
+        type: string
+      old_password:
+        description: 旧密码
+        type: string
+    required:
+    - new_password
+    - old_password
+    type: object
+  dto.CreatePermissionRequest:
+    properties:
+      code:
+        description: 权限编码
+        type: string
+      component:
+        description: 组件路径
+        type: string
+      description:
+        description: 权限描述
+        type: string
+      icon:
+        description: 图标
+        type: string
+      name:
+        description: 权限名称
+        type: string
+      parent_id:
+        description: 父级ID
+        type: integer
+      path:
+        description: 路由路径
+        type: string
+      sort:
+        description: 排序
+        type: integer
+      status:
+        description: 状态：0-禁用，1-启用
+        type: integer
+      type:
+        description: 权限类型：menu-菜单，button-按钮，api-接口
+        type: string
+    required:
+    - code
+    - name
+    - type
+    type: object
+  dto.CreateRoleRequest:
+    properties:
+      code:
+        description: 角色编码
+        type: string
+      description:
+        description: 角色描述
+        type: string
+      name:
+        description: 角色名称
+        type: string
+      sort:
+        description: 排序
+        type: integer
+      status:
+        description: 状态：0-禁用，1-启用
+        type: integer
+    required:
+    - code
+    - name
+    type: object
+  dto.CreateUserRequest:
+    properties:
+      avatar:
+        description: 头像
+        type: string
+      email:
+        description: 邮箱
+        type: string
+      password:
+        description: 密码
+        type: string
+      phone:
+        description: 手机号
+        type: string
+      remark:
+        description: 备注
+        type: string
+      role_ids:
+        description: 角色ID列表
+        items:
+          type: integer
+        type: array
+      status:
+        description: 状态：0-禁用，1-启用
+        type: integer
+      user_id:
+        description: 用户ID
+        type: string
+      username:
+        description: 用户名
+        type: string
+    required:
+    - password
+    - user_id
+    - username
+    type: object
   dto.LoginRequest:
     properties:
       password:
@@ -16,9 +122,17 @@ definitions:
     type: object
   dto.LoginResponse:
     properties:
+      expires_in:
+        description: token过期时间（秒）
+        example: 86400
+        type: integer
+      refresh_token:
+        description: 刷新token
+        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        type: string
       token:
-        description: 用户token
-        example: abc123
+        description: 访问token
+        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
         type: string
     type: object
   dto.LogoutRequest:
@@ -30,608 +144,218 @@ definitions:
     required:
     - token
     type: object
-  dto.MediaConfigPageResponse:
+  dto.PermissionResponse:
+    properties:
+      children:
+        description: 子权限
+        items:
+          $ref: '#/definitions/dto.PermissionResponse'
+        type: array
+      code:
+        description: 权限编码
+        type: string
+      component:
+        description: 组件路径
+        type: string
+      created_at:
+        description: 创建时间
+        type: string
+      description:
+        description: 权限描述
+        type: string
+      icon:
+        description: 图标
+        type: string
+      id:
+        description: 权限ID
+        type: integer
+      name:
+        description: 权限名称
+        type: string
+      parent_id:
+        description: 父级ID
+        type: integer
+      path:
+        description: 路由路径
+        type: string
+      sort:
+        description: 排序
+        type: integer
+      status:
+        description: 状态
+        type: integer
+      type:
+        description: 权限类型
+        type: string
+      updated_at:
+        description: 更新时间
+        type: string
+    type: object
+  dto.RefreshTokenRequest:
+    properties:
+      refresh_token:
+        description: 刷新token
+        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        type: string
+    required:
+    - refresh_token
+    type: object
+  dto.RoleResponse:
+    properties:
+      code:
+        description: 角色编码
+        type: string
+      created_at:
+        description: 创建时间
+        type: string
+      description:
+        description: 角色描述
+        type: string
+      id:
+        description: 角色ID
+        type: integer
+      name:
+        description: 角色名称
+        type: string
+      sort:
+        description: 排序
+        type: integer
+      status:
+        description: 状态：0-禁用，1-启用
+        type: integer
+      updated_at:
+        description: 更新时间
+        type: string
+    type: object
+  dto.UpdateRoleRequest:
+    properties:
+      code:
+        description: 角色编码
+        type: string
+      description:
+        description: 角色描述
+        type: string
+      id:
+        description: 角色ID
+        type: integer
+      name:
+        description: 角色名称
+        type: string
+      sort:
+        description: 排序
+        type: integer
+      status:
+        description: 状态：0-禁用，1-启用
+        type: integer
+    required:
+    - code
+    - id
+    - name
+    type: object
+  dto.UpdateUserRequest:
+    properties:
+      avatar:
+        description: 头像
+        type: string
+      email:
+        description: 邮箱
+        type: string
+      id:
+        description: 用户ID
+        type: integer
+      phone:
+        description: 手机号
+        type: string
+      remark:
+        description: 备注
+        type: string
+      role_ids:
+        description: 角色ID列表
+        items:
+          type: integer
+        type: array
+      status:
+        description: 状态：0-禁用，1-启用
+        type: integer
+      user_id:
+        description: 用户ID
+        type: string
+      username:
+        description: 用户名
+        type: string
+    required:
+    - id
+    - user_id
+    - username
+    type: object
+  dto.UserListResponse:
     properties:
       list:
+        description: 用户列表
         items:
-          $ref: '#/definitions/dto.MediaConfigResponse'
+          $ref: '#/definitions/dto.UserResponse'
         type: array
       total:
+        description: 总数
         type: integer
     type: object
-  dto.MediaConfigResponse:
+  dto.UserResponse:
     properties:
-      code:
+      avatar:
+        description: 头像
+        type: string
+      created_at:
+        description: 创建时间
+        type: string
+      email:
+        description: 邮箱
         type: string
       id:
+        description: 用户ID
         type: integer
-      media_desc:
+      last_login:
+        description: 最后登录时间
         type: string
-      name:
+      login_count:
+        description: 登录次数
+        type: integer
+      phone:
+        description: 手机号
         type: string
+      remark:
+        description: 备注
+        type: string
+      roles:
+        description: 角色列表
+        items:
+          type: string
+        type: array
       status:
-        type: string
-      type:
-        type: string
-      url:
-        type: string
-    type: object
-  dto.ModelsInfoResponse:
-    properties:
-      algorithm:
-        description: 算法
-        type: string
-      classify:
-        description: 分类
-        type: string
-      date_time:
-        description: 日期时间
-        type: string
-      description:
-        description: 描述
-        type: string
-      id:
-        description: 模型ID
+        description: 状态：0-禁用，1-启用
         type: integer
-      name:
-        description: 模型名称
+      updated_at:
+        description: 更新时间
         type: string
-      sophon_type:
-        description: Sophon类型
-        type: integer
-      specialty:
-        description: 专业性
-        type: integer
-    type: object
-  dto.NetworkConfigResponse:
-    properties:
-      bandwidth:
-        description: 带宽，如"100Mb/s"
+      user_id:
+        description: 用户ID
         type: string
-      bandwidth_varity:
-        description: 带宽变化
-        type: boolean
-      device:
-        description: 网络设备，如"eth0"
+      username:
+        description: 用户名
         type: string
-      dns:
-        description: DNS服务器
-        type: string
-      gateway:
-        description: 网关地址
-        type: string
-      ip:
-        description: IP地址
-        type: string
-      mac:
-        description: MAC地址
-        type: string
-      netmask:
-        description: 子网掩码
-        type: string
-      status:
-        description: 网络状态：static/dynamic
-        type: string
-    type: object
-  dto.SaveAlarmCategoryRequest:
-    properties:
-      alarm_desc:
-        description: 告警描述
-        type: string
-      alarm_type:
-        description: 告警类别
-        type: string
-      arithmetic:
-        description: 所属算法
-        type: string
-      audio_file:
-        description: 语音文件
-        type: string
-      sophon_type:
-        description: Sophon类型
-        type: integer
-    required:
-    - alarm_type
-    - arithmetic
-    type: object
-  dto.SaveAlarmManageRequest:
-    properties:
-      alarm_detail:
-        type: string
-      alarm_task:
-        type: string
-      alarm_type:
-        type: string
-      alarm_video:
-        type: string
-      img:
-        type: string
-      init_img:
-        type: string
-      media_id:
-        type: integer
-      media_url:
-        type: string
-      report_addr:
-        type: string
-      report_status:
-        type: integer
-      tm:
-        type: string
-      video_media:
-        type: string
-    required:
-    - alarm_task
-    type: object
-  dto.SaveDeviceListRequest:
-    properties:
-      face_device:
-        description: 是否为人脸设备
-        type: integer
-      ip_address:
-        description: IP地址
-        type: string
-      last_used_tm:
-        description: 最后使用时间
-        type: string
-      status:
-        description: 设备状态
-        type: integer
-    required:
-    - ip_address
-    type: object
-  dto.SaveMediaConfigRequest:
-    properties:
-      code:
-        description: 编码
-        example: CAM001
-        type: string
-      media_desc:
-        description: 媒体描述
-        example: 前门摄像头
-        type: string
-      name:
-        description: 媒体名称
-        example: 摄像头1
-        type: string
-      status:
-        description: 状态
-        example: active
-        type: string
-      type:
-        description: 类型
-        example: camera
-        type: string
-      url:
-        description: 媒体URL
-        example: rtsp://...
-        type: string
-    required:
-    - name
-    - url
-    type: object
-  dto.SaveModelsInfoRequest:
-    properties:
-      algorithm:
-        description: 算法
-        example: face_detection
-        type: string
-      classify:
-        description: 分类
-        example: 人脸识别
-        type: string
-      date_time:
-        description: 日期时间
-        example: "2024-01-01 12:00:00"
-        type: string
-      description:
-        description: 描述
-        example: 用于人脸识别的深度学习模型
-        type: string
-      name:
-        description: 模型名称
-        example: 人脸识别模型
-        type: string
-      sophon_type:
-        description: Sophon类型
-        example: 1
-        type: integer
-      specialty:
-        description: 专业性
-        example: 1
-        type: integer
-    required:
-    - algorithm
-    - name
-    type: object
-  dto.SaveParamConfRequest:
-    properties:
-      key:
-        description: 配置键
-        type: string
-      param:
-        description: 参数名称
-        type: string
-      param_value:
-        description: 参数值
-        type: string
-    required:
-    - key
-    - param
-    type: object
-  dto.SavePlanTemplateRequest:
-    properties:
-      name:
-        type: string
-      plan:
-        type: string
-    required:
-    - name
-    - plan
-    type: object
-  dto.SaveTaskManageRequest:
-    properties:
-      alarm_interval:
-        example: 30
-        type: integer
-      arit_params:
-        example: '{"threshold":0.8}'
-        type: string
-      arithmetic_config:
-        example: 人脸识别+行为分析
-        type: string
-      media_id:
-        example: 1
-        type: integer
-      media_source:
-        example: rtsp://192.168.1.100/stream
-        type: string
-      name:
-        example: 监控任务1
-        type: string
-      plan_id:
-        example: 1
-        type: integer
-      report_addr:
-        example: http://192.168.1.200/api/alarm
-        type: string
-      sophon_types:
-        example: 1,2,3
-        type: string
-      status_desc:
-        example: 运行中
-        type: string
-      task_status:
-        example: 1
-        type: integer
-      used_ip:
-        example: 192.168.1.100
-        type: string
-      work_plan:
-        example: 全天候监控
-        type: string
-    required:
-    - name
-    type: object
-  dto.SaveThresholdConfRequest:
-    properties:
-      param_desc:
-        description: 参数描述
-        type: string
-      param_value:
-        description: 参数值
-        type: number
-      sophon_type:
-        description: Sophon类型
-        type: integer
-    required:
-    - param_desc
-    type: object
-  dto.UpdateAlarmManageRequest:
-    properties:
-      alarm_detail:
-        type: string
-      alarm_task:
-        type: string
-      alarm_type:
-        type: string
-      alarm_video:
-        type: string
-      id:
-        type: integer
-      img:
-        type: string
-      init_img:
-        type: string
-      media_id:
-        type: integer
-      media_url:
-        type: string
-      report_addr:
-        type: string
-      report_status:
-        type: integer
-      tm:
-        type: string
-      video_media:
-        type: string
-    required:
-    - alarm_task
-    - id
-    type: object
-  dto.UpdateMediaConfigRequest:
-    properties:
-      code:
-        description: 编码
-        example: CAM001
-        type: string
-      id:
-        description: 媒体配置ID
-        example: 1
-        type: integer
-      media_desc:
-        description: 媒体描述
-        example: 前门摄像头
-        type: string
-      name:
-        description: 媒体名称
-        example: 摄像头1
-        type: string
-      status:
-        description: 状态
-        example: active
-        type: string
-      type:
-        description: 类型
-        example: camera
-        type: string
-      url:
-        description: 媒体URL
-        example: rtsp://...
-        type: string
-    required:
-    - id
-    - name
-    - url
-    type: object
-  dto.UpdatePlanTemplateRequest:
-    properties:
-      id:
-        type: integer
-      name:
-        type: string
-      plan:
-        type: string
-    required:
-    - id
-    - name
-    - plan
-    type: object
-  dto.UpdateTaskManageRequest:
-    properties:
-      alarm_interval:
-        type: integer
-      arit_params:
-        type: string
-      arithmetic_config:
-        type: string
-      id:
-        type: integer
-      media_id:
-        type: integer
-      media_source:
-        type: string
-      name:
-        type: string
-      plan_id:
-        type: integer
-      report_addr:
-        type: string
-      sophon_types:
-        type: string
-      status_desc:
-        type: string
-      task_status:
-        type: integer
-      used_ip:
-        type: string
-      work_plan:
-        type: string
-    required:
-    - id
-    - name
     type: object
   handle.Response:
     properties:
-      code:
+      errCode:
         description: 响应码，0表示成功
         example: 0
         type: integer
-      msg:
+      errMsg:
         description: 响应消息
         example: ok
         type: string
       result:
         description: 响应数据
         type: object
-    type: object
-  model.AlarmCategory:
-    properties:
-      alarm_desc:
-        description: 告警描述
-        type: string
-      alarm_type:
-        description: 告警类别
-        type: string
-      arithmetic:
-        description: 所属算法
-        type: string
-      audio_file:
-        description: 语音文件
-        type: string
-      id:
-        type: integer
-      sophon_type:
-        description: Sophon类型
-        type: integer
-    type: object
-  model.AlarmManage:
-    properties:
-      alarm_detail:
-        type: string
-      alarm_task:
-        type: string
-      alarm_type:
-        type: string
-      alarm_video:
-        type: string
-      id:
-        type: integer
-      img:
-        type: string
-      init_img:
-        description: 原图
-        type: string
-      media_id:
-        type: integer
-      media_url:
-        type: string
-      report_addr:
-        type: string
-      report_status:
-        type: integer
-      tm:
-        type: string
-      video_media:
-        type: string
-    type: object
-  model.DeviceList:
-    properties:
-      face_device:
-        description: 是否为人脸设备：0否，1是
-        type: integer
-      id:
-        type: integer
-      ip_address:
-        description: IP地址
-        type: string
-      last_used_tm:
-        description: 最后使用时间
-        type: string
-      status:
-        description: 设备状态：0离线，1在线
-        type: integer
-    type: object
-  model.MediaConfig:
-    properties:
-      code:
-        type: string
-      id:
-        type: integer
-      media_desc:
-        type: string
-      name:
-        type: string
-      status:
-        type: string
-      type:
-        type: string
-      url:
-        type: string
-    type: object
-  model.ModelsInfo:
-    properties:
-      algorithm:
-        description: 算法
-        type: string
-      classify:
-        description: 分类
-        type: string
-      date_time:
-        description: 日期时间
-        type: string
-      description:
-        description: 描述
-        type: string
-      id:
-        type: integer
-      name:
-        description: 模型名称
-        type: string
-      sophon_type:
-        description: Sophon类型
-        type: integer
-      specialty:
-        description: 专业性
-        type: integer
-    type: object
-  model.ParamConf:
-    properties:
-      id:
-        type: integer
-      key:
-        description: 配置键
-        type: string
-      param:
-        description: 参数名称
-        type: string
-      param_value:
-        description: 参数值
-        type: string
-    type: object
-  model.PlanTemplate:
-    properties:
-      id:
-        type: integer
-      name:
-        type: string
-      plan:
-        type: string
-    type: object
-  model.TaskManage:
-    properties:
-      alarm_interval:
-        type: integer
-      arit_params:
-        type: string
-      arithmetic_config:
-        type: string
-      id:
-        type: integer
-      media_id:
-        type: integer
-      media_source:
-        type: string
-      name:
-        type: string
-      plan_id:
-        type: integer
-      report_addr:
-        type: string
-      sophon_types:
-        type: string
-      status_desc:
-        type: string
-      task_status:
-        type: integer
-      used_ip:
-        type: string
-      work_plan:
-        type: string
-    type: object
-  model.ThresholdConf:
-    properties:
-      id:
-        type: integer
-      param_desc:
-        description: 参数描述
-        type: string
-      param_value:
-        description: 参数值
-        type: number
-      sophon_type:
-        description: Sophon类型
-        type: integer
     type: object
 externalDocs:
   description: OpenAPI
@@ -642,138 +366,14 @@ info:
     email: support@swagger.io
     name: API Support
     url: http://www.swagger.io/support
-  description: This is a daily news reboot server API documentation.
+  description: Go Web后台管理框架API文档
   license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
+    name: MIT
+    url: https://opensource.org/licenses/MIT
   termsOfService: http://swagger.io/terms/
-  title: Daily News Reboot API
+  title: Go Web Admin API
   version: "1.0"
 paths:
-  /alarmCategory/saveAlarmCategory:
-    post:
-      consumes:
-      - application/json
-      description: 保存新的告警分类信息
-      parameters:
-      - description: 告警分类信息
-        in: body
-        name: request
-        required: true
-        schema:
-          $ref: '#/definitions/dto.SaveAlarmCategoryRequest'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: 保存成功
-          schema:
-            allOf:
-            - $ref: '#/definitions/handle.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/model.AlarmCategory'
-              type: object
-        "400":
-          description: 参数错误
-          schema:
-            $ref: '#/definitions/handle.Response'
-      summary: 保存告警分类
-      tags:
-      - 告警分类
-  /alarmManage/saveAlarmManage:
-    post:
-      consumes:
-      - application/json
-      description: 保存新的报警管理信息
-      parameters:
-      - description: 报警管理信息
-        in: body
-        name: request
-        required: true
-        schema:
-          $ref: '#/definitions/dto.SaveAlarmManageRequest'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: 保存成功
-          schema:
-            allOf:
-            - $ref: '#/definitions/handle.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/model.AlarmManage'
-              type: object
-        "400":
-          description: 参数错误
-          schema:
-            $ref: '#/definitions/handle.Response'
-      summary: 保存报警管理
-      tags:
-      - 报警管理
-  /alarmManage/updateAlarmManage:
-    post:
-      consumes:
-      - application/json
-      description: 更新已有的报警管理信息
-      parameters:
-      - description: 报警管理更新信息
-        in: body
-        name: request
-        required: true
-        schema:
-          $ref: '#/definitions/dto.UpdateAlarmManageRequest'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: 更新成功
-          schema:
-            allOf:
-            - $ref: '#/definitions/handle.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/model.AlarmManage'
-              type: object
-        "400":
-          description: 参数错误
-          schema:
-            $ref: '#/definitions/handle.Response'
-      summary: 更新报警管理
-      tags:
-      - 报警管理
-  /deviceList/saveDeviceList:
-    post:
-      consumes:
-      - application/json
-      description: 保存新的设备信息
-      parameters:
-      - description: 设备信息
-        in: body
-        name: request
-        required: true
-        schema:
-          $ref: '#/definitions/dto.SaveDeviceListRequest'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: 保存成功
-          schema:
-            allOf:
-            - $ref: '#/definitions/handle.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/model.DeviceList'
-              type: object
-        "400":
-          description: 参数错误
-          schema:
-            $ref: '#/definitions/handle.Response'
-      summary: 保存设备信息
-      tags:
-      - 设备管理
   /login:
     post:
       consumes:
@@ -841,13 +441,69 @@ paths:
       summary: 用户登出
       tags:
       - 基础接口
-  /mainModule/delMediaConfig/{id}:
+  /permission:
+    get:
+      consumes:
+      - application/json
+      description: 获取权限树形列表
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 获取成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/handle.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/dto.PermissionResponse'
+                  type: array
+              type: object
+      security:
+      - BearerAuth: []
+      summary: 获取权限列表
+      tags:
+      - 权限管理
+    post:
+      consumes:
+      - application/json
+      description: 创建新权限
+      parameters:
+      - description: 创建权限请求参数
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreatePermissionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 创建成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/handle.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/dto.PermissionResponse'
+              type: object
+        "400":
+          description: 参数错误
+          schema:
+            $ref: '#/definitions/handle.Response'
+      security:
+      - BearerAuth: []
+      summary: 创建权限
+      tags:
+      - 权限管理
+  /permission/{id}:
     delete:
       consumes:
       - application/json
-      description: 根据ID删除媒体配置
+      description: 删除权限
       parameters:
-      - description: 媒体配置ID
+      - description: 权限ID
         in: path
         name: id
         required: true
@@ -859,20 +515,21 @@ paths:
           description: 删除成功
           schema:
             $ref: '#/definitions/handle.Response'
-        "400":
-          description: 参数错误
+        "404":
+          description: 权限不存在
           schema:
             $ref: '#/definitions/handle.Response'
-      summary: 删除媒体配置
+      security:
+      - BearerAuth: []
+      summary: 删除权限
       tags:
-      - 媒体配置
-  /mainModule/getMediaConfig/{id}:
+      - 权限管理
     get:
       consumes:
       - application/json
-      description: 根据ID获取媒体配置的详细信息
+      description: 根据权限ID获取权限详情
       parameters:
-      - description: 媒体配置ID
+      - description: 权限ID
         in: path
         name: id
         required: true
@@ -887,20 +544,253 @@ paths:
             - $ref: '#/definitions/handle.Response'
             - properties:
                 data:
-                  $ref: '#/definitions/model.MediaConfig'
+                  $ref: '#/definitions/dto.PermissionResponse'
+              type: object
+        "404":
+          description: 权限不存在
+          schema:
+            $ref: '#/definitions/handle.Response'
+      security:
+      - BearerAuth: []
+      summary: 获取权限详情
+      tags:
+      - 权限管理
+    put:
+      consumes:
+      - application/json
+      description: 更新权限信息
+      parameters:
+      - description: 权限ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 更新权限请求参数
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreatePermissionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 更新成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/handle.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/dto.PermissionResponse'
               type: object
         "400":
           description: 参数错误
           schema:
             $ref: '#/definitions/handle.Response'
-      summary: 获取媒体配置详情
+        "404":
+          description: 权限不存在
+          schema:
+            $ref: '#/definitions/handle.Response'
+      security:
+      - BearerAuth: []
+      summary: 更新权限
       tags:
-      - 媒体配置
-  /mainModule/getMediaConfigPage:
+      - 权限管理
+  /refresh:
+    post:
+      consumes:
+      - application/json
+      description: 使用刷新token获取新的访问token
+      parameters:
+      - description: 刷新token请求参数
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.RefreshTokenRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 刷新成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/handle.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/dto.LoginResponse'
+              type: object
+        "400":
+          description: 参数错误
+          schema:
+            $ref: '#/definitions/handle.Response'
+        "401":
+          description: 刷新token无效
+          schema:
+            $ref: '#/definitions/handle.Response'
+      summary: 刷新token
+      tags:
+      - 基础接口
+  /role:
     get:
       consumes:
       - application/json
-      description: 分页获取媒体配置列表
+      description: 获取所有角色列表
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 获取成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/handle.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/dto.RoleResponse'
+                  type: array
+              type: object
+      security:
+      - BearerAuth: []
+      summary: 获取角色列表
+      tags:
+      - 角色管理
+    post:
+      consumes:
+      - application/json
+      description: 创建新角色
+      parameters:
+      - description: 创建角色请求参数
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateRoleRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 创建成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/handle.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/dto.RoleResponse'
+              type: object
+        "400":
+          description: 参数错误
+          schema:
+            $ref: '#/definitions/handle.Response'
+      security:
+      - BearerAuth: []
+      summary: 创建角色
+      tags:
+      - 角色管理
+  /role/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: 删除角色
+      parameters:
+      - description: 角色ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 删除成功
+          schema:
+            $ref: '#/definitions/handle.Response'
+        "404":
+          description: 角色不存在
+          schema:
+            $ref: '#/definitions/handle.Response'
+      security:
+      - BearerAuth: []
+      summary: 删除角色
+      tags:
+      - 角色管理
+    get:
+      consumes:
+      - application/json
+      description: 根据角色ID获取角色详情
+      parameters:
+      - description: 角色ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 获取成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/handle.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/dto.RoleResponse'
+              type: object
+        "404":
+          description: 角色不存在
+          schema:
+            $ref: '#/definitions/handle.Response'
+      security:
+      - BearerAuth: []
+      summary: 获取角色详情
+      tags:
+      - 角色管理
+    put:
+      consumes:
+      - application/json
+      description: 更新角色信息
+      parameters:
+      - description: 角色ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 更新角色请求参数
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdateRoleRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 更新成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/handle.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/dto.RoleResponse'
+              type: object
+        "400":
+          description: 参数错误
+          schema:
+            $ref: '#/definitions/handle.Response'
+        "404":
+          description: 角色不存在
+          schema:
+            $ref: '#/definitions/handle.Response'
+      security:
+      - BearerAuth: []
+      summary: 更新角色
+      tags:
+      - 角色管理
+  /user:
+    get:
+      consumes:
+      - application/json
+      description: 分页获取用户列表
       parameters:
       - default: 1
         description: 页码
@@ -910,7 +800,15 @@ paths:
       - default: 10
         description: 每页数量
         in: query
-        name: pageSize
+        name: page_size
+        type: integer
+      - description: 用户名（模糊搜索）
+        in: query
+        name: username
+        type: string
+      - description: 状态筛选
+        in: query
+        name: status
         type: integer
       produces:
       - application/json
@@ -922,96 +820,78 @@ paths:
             - $ref: '#/definitions/handle.Response'
             - properties:
                 data:
-                  $ref: '#/definitions/dto.MediaConfigPageResponse'
+                  $ref: '#/definitions/dto.UserListResponse'
               type: object
-        "400":
-          description: 参数错误
-          schema:
-            $ref: '#/definitions/handle.Response'
-      summary: 分页获取媒体配置
+      security:
+      - BearerAuth: []
+      summary: 获取用户列表
       tags:
-      - 媒体配置
-  /mainModule/saveMediaConfig:
+      - 用户管理
     post:
       consumes:
       - application/json
-      description: 保存新的媒体配置信息
+      description: 创建新用户
       parameters:
-      - description: 媒体配置信息
+      - description: 创建用户请求参数
         in: body
         name: request
         required: true
         schema:
-          $ref: '#/definitions/dto.SaveMediaConfigRequest'
+          $ref: '#/definitions/dto.CreateUserRequest'
       produces:
       - application/json
       responses:
         "200":
-          description: 保存成功
+          description: 创建成功
           schema:
             allOf:
             - $ref: '#/definitions/handle.Response'
             - properties:
                 data:
-                  $ref: '#/definitions/model.MediaConfig'
+                  $ref: '#/definitions/dto.UserResponse'
               type: object
         "400":
           description: 参数错误
           schema:
             $ref: '#/definitions/handle.Response'
-        "401":
-          description: 未授权
-          schema:
-            $ref: '#/definitions/handle.Response'
       security:
       - BearerAuth: []
-      summary: 保存媒体配置
+      summary: 创建用户
       tags:
-      - 媒体配置
-  /mainModule/updateMediaConfig:
-    post:
+      - 用户管理
+  /user/{id}:
+    delete:
       consumes:
       - application/json
-      description: 更新已有的媒体配置信息
+      description: 删除用户
       parameters:
-      - description: 媒体配置更新信息
-        in: body
-        name: request
+      - description: 用户ID
+        in: path
+        name: id
         required: true
-        schema:
-          $ref: '#/definitions/dto.UpdateMediaConfigRequest'
+        type: integer
       produces:
       - application/json
       responses:
         "200":
-          description: 更新成功
-          schema:
-            allOf:
-            - $ref: '#/definitions/handle.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/model.MediaConfig'
-              type: object
-        "400":
-          description: 参数错误
+          description: 删除成功
           schema:
             $ref: '#/definitions/handle.Response'
-        "401":
-          description: 未授权
+        "404":
+          description: 用户不存在
           schema:
             $ref: '#/definitions/handle.Response'
       security:
       - BearerAuth: []
-      summary: 更新媒体配置
+      summary: 删除用户
       tags:
-      - 媒体配置
-  /modelsInfo/getModelsInfo/{id}:
+      - 用户管理
     get:
       consumes:
       - application/json
-      description: 根据模型ID获取详细信息
+      description: 根据用户ID获取用户详情
       parameters:
-      - description: 模型ID
+      - description: 用户ID
         in: path
         name: id
         required: true
@@ -1026,202 +906,33 @@ paths:
             - $ref: '#/definitions/handle.Response'
             - properties:
                 data:
-                  $ref: '#/definitions/dto.ModelsInfoResponse'
+                  $ref: '#/definitions/dto.UserResponse'
               type: object
-        "400":
-          description: 参数错误
+        "404":
+          description: 用户不存在
           schema:
             $ref: '#/definitions/handle.Response'
-      summary: 根据ID获取模型信息
+      security:
+      - BearerAuth: []
+      summary: 获取用户详情
       tags:
-      - 模型信息
-  /modelsInfo/getModelsInfoAll:
-    get:
+      - 用户管理
+    put:
       consumes:
       - application/json
-      description: 获取系统中所有的模型信息列表
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: 获取成功
-          schema:
-            allOf:
-            - $ref: '#/definitions/handle.Response'
-            - properties:
-                data:
-                  items:
-                    $ref: '#/definitions/dto.ModelsInfoResponse'
-                  type: array
-              type: object
-        "400":
-          description: 获取失败
-          schema:
-            $ref: '#/definitions/handle.Response'
-      summary: 获取所有模型信息
-      tags:
-      - 模型信息
-  /modelsInfo/saveModelsInfo:
-    post:
-      consumes:
-      - application/json
-      description: 保存新的模型信息
+      description: 更新用户信息
       parameters:
-      - description: 模型信息
-        in: body
-        name: request
-        required: true
-        schema:
-          $ref: '#/definitions/dto.SaveModelsInfoRequest'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: 保存成功
-          schema:
-            allOf:
-            - $ref: '#/definitions/handle.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/model.ModelsInfo'
-              type: object
-        "400":
-          description: 参数错误
-          schema:
-            $ref: '#/definitions/handle.Response'
-      summary: 保存模型信息
-      tags:
-      - 模型信息
-  /networkConfig/getNetworkConfig/{device}:
-    get:
-      consumes:
-      - application/json
-      description: 根据设备名称获取指定网络接口的配置信息
-      parameters:
-      - description: 网络设备名称
+      - description: 用户ID
         in: path
-        name: device
+        name: id
         required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: 获取成功
-          schema:
-            allOf:
-            - $ref: '#/definitions/handle.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/dto.NetworkConfigResponse'
-              type: object
-        "400":
-          description: 参数错误
-          schema:
-            $ref: '#/definitions/handle.Response'
-      summary: 获取网络接口配置
-      tags:
-      - 网络配置
-  /networkConfig/getNetworkInterfaces:
-    get:
-      consumes:
-      - application/json
-      description: 获取系统中所有网络接口的配置信息列表
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: 获取成功
-          schema:
-            allOf:
-            - $ref: '#/definitions/handle.Response'
-            - properties:
-                data:
-                  items:
-                    $ref: '#/definitions/dto.NetworkConfigResponse'
-                  type: array
-              type: object
-        "400":
-          description: 获取失败
-          schema:
-            $ref: '#/definitions/handle.Response'
-      summary: 获取所有网络接口
-      tags:
-      - 网络配置
-  /paramConf/saveParamConf:
-    post:
-      consumes:
-      - application/json
-      description: 保存新的参数配置信息
-      parameters:
-      - description: 参数配置信息
+        type: integer
+      - description: 更新用户请求参数
         in: body
         name: request
         required: true
         schema:
-          $ref: '#/definitions/dto.SaveParamConfRequest'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: 保存成功
-          schema:
-            allOf:
-            - $ref: '#/definitions/handle.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/model.ParamConf'
-              type: object
-        "400":
-          description: 参数错误
-          schema:
-            $ref: '#/definitions/handle.Response'
-      summary: 保存参数配置
-      tags:
-      - 参数配置
-  /planTemplate/savePlanTemplate:
-    post:
-      consumes:
-      - application/json
-      description: 保存新的计划模板信息
-      parameters:
-      - description: 计划模板信息
-        in: body
-        name: request
-        required: true
-        schema:
-          $ref: '#/definitions/dto.SavePlanTemplateRequest'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: 保存成功
-          schema:
-            allOf:
-            - $ref: '#/definitions/handle.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/model.PlanTemplate'
-              type: object
-        "400":
-          description: 参数错误
-          schema:
-            $ref: '#/definitions/handle.Response'
-      summary: 保存计划模板
-      tags:
-      - 计划模板
-  /planTemplate/updatePlanTemplate:
-    post:
-      consumes:
-      - application/json
-      description: 更新已有的计划模板信息
-      parameters:
-      - description: 计划模板更新信息
-        in: body
-        name: request
-        required: true
-        schema:
-          $ref: '#/definitions/dto.UpdatePlanTemplateRequest'
+          $ref: '#/definitions/dto.UpdateUserRequest'
       produces:
       - application/json
       responses:
@@ -1232,108 +943,49 @@ paths:
             - $ref: '#/definitions/handle.Response'
             - properties:
                 data:
-                  $ref: '#/definitions/model.PlanTemplate'
+                  $ref: '#/definitions/dto.UserResponse'
               type: object
         "400":
           description: 参数错误
           schema:
             $ref: '#/definitions/handle.Response'
-      summary: 更新计划模板
+        "404":
+          description: 用户不存在
+          schema:
+            $ref: '#/definitions/handle.Response'
+      security:
+      - BearerAuth: []
+      summary: 更新用户
       tags:
-      - 计划模板
-  /taskManage/saveTaskManage:
+      - 用户管理
+  /user/change-password:
     post:
       consumes:
       - application/json
-      description: 保存新的任务管理信息
+      description: 修改当前用户密码
       parameters:
-      - description: 任务管理信息
+      - description: 修改密码请求参数
         in: body
         name: request
         required: true
         schema:
-          $ref: '#/definitions/dto.SaveTaskManageRequest'
+          $ref: '#/definitions/dto.ChangePasswordRequest'
       produces:
       - application/json
       responses:
         "200":
-          description: 保存成功
+          description: 修改成功
           schema:
-            allOf:
-            - $ref: '#/definitions/handle.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/model.TaskManage'
-              type: object
+            $ref: '#/definitions/handle.Response'
         "400":
           description: 参数错误
           schema:
             $ref: '#/definitions/handle.Response'
-      summary: 保存任务管理
+      security:
+      - BearerAuth: []
+      summary: 修改密码
       tags:
-      - 任务管理
-  /taskManage/updateTaskManage:
-    post:
-      consumes:
-      - application/json
-      description: 更新已有的任务管理信息
-      parameters:
-      - description: 任务管理更新信息
-        in: body
-        name: request
-        required: true
-        schema:
-          $ref: '#/definitions/dto.UpdateTaskManageRequest'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: 更新成功
-          schema:
-            allOf:
-            - $ref: '#/definitions/handle.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/model.TaskManage'
-              type: object
-        "400":
-          description: 参数错误
-          schema:
-            $ref: '#/definitions/handle.Response'
-      summary: 更新任务管理
-      tags:
-      - 任务管理
-  /thresholdConf/saveThresholdConf:
-    post:
-      consumes:
-      - application/json
-      description: 保存新的阈值配置信息
-      parameters:
-      - description: 阈值配置信息
-        in: body
-        name: request
-        required: true
-        schema:
-          $ref: '#/definitions/dto.SaveThresholdConfRequest'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: 保存成功
-          schema:
-            allOf:
-            - $ref: '#/definitions/handle.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/model.ThresholdConf'
-              type: object
-        "400":
-          description: 参数错误
-          schema:
-            $ref: '#/definitions/handle.Response'
-      summary: 保存阈值配置
-      tags:
-      - 阈值配置
+      - 用户管理
 securityDefinitions:
   BearerAuth:
     description: Type "Bearer" followed by a space and JWT token.

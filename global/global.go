@@ -1,8 +1,8 @@
 package global
 
 import (
-	"feishuReboot/pkg/model"
-	"github.com/jinzhu/gorm"
+	"go-web-template/pkg/model"
+	"gorm.io/gorm"
 )
 
 var (

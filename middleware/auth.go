@@ -1,33 +1,45 @@
 package middleware
 
 import (
-	"feishuReboot/pkg/repo"
-	"feishuReboot/pkg/service"
+	"go-web-template/pkg/utils"
 	"net/http"
-
-	"time"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 )
 
+// AuthMiddleware JWT认证中间件
 func AuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		_token := service.Token(c.Request)
-		if _token != "" {
-			user := service.GetUser(_token)
-			if user != nil {
-				now := time.Now()
-				if now.Before(user.ExpireTime) {
-					// 如果距离过期时间还有超过10分钟，则延长过期时间
-					if user.ExpireTime.Sub(now) < time.Minute*10 {
-						user.ExpireTime = now.Add(time.Hour * 2)
-						repo.UpdateUser(user)
-					}
-					c.Next()
-					return
-				}
-			}
+		// 从请求头获取token
+		authHeader := c.GetHeader("Authorization")
+		if authHeader == "" {
+			c.JSON(http.StatusUnauthorized, gin.H{"error": "缺少Authorization头"})
+			c.Abort()
+			return
 		}
-		c.AbortWithStatusJSON(http.StatusUnauthorized, map[string]string{"error": "无效的token"})
+
+		// 检查Bearer前缀
+		tokenString := ""
+		if strings.HasPrefix(authHeader, "Bearer ") {
+			tokenString = strings.TrimPrefix(authHeader, "Bearer ")
+		} else {
+			c.JSON(http.StatusUnauthorized, gin.H{"error": "Authorization头格式错误"})
+			c.Abort()
+			return
+		}
+
+		// 解析token
+		claims, err := utils.ParseToken(tokenString)
+		if err != nil {
+			c.JSON(http.StatusUnauthorized, gin.H{"error": "无效的token"})
+			c.Abort()
+			return
+		}
+
+		// 将用户信息存储到上下文中
+		c.Set("user_id", claims.UserID)
+		c.Set("username", claims.Username)
+		c.Next()
 	}
 }

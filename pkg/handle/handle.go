@@ -1,9 +1,9 @@
 package handle
 
 import (
-	"feishuReboot/logger"
-	"feishuReboot/pkg/buserr"
-	"feishuReboot/pkg/dto"
+	"go-web-template/logger"
+	"go-web-template/pkg/buserr"
+	"go-web-template/pkg/dto"
 )
 
 // Response 通用响应结构，用于 Swagger 文档

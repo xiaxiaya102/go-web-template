@@ -1,8 +1,8 @@
 package initialization
 
 import (
-	"feishuReboot/global"
-	"feishuReboot/logger"
+	"go-web-template/global"
+	"go-web-template/logger"
 	"net/http"
 
 	"github.com/gin-gonic/gin"

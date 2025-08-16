@@ -1,9 +1,9 @@
 package middleware
 
 import (
-	"feishuReboot/global"
-	"feishuReboot/pkg/buserr"
-	"feishuReboot/pkg/handle"
+	"go-web-template/global"
+	"go-web-template/pkg/buserr"
+	"go-web-template/pkg/handle"
 	"net/http"
 
 	"github.com/gin-gonic/gin"

@@ -1,9 +1,9 @@
 package config
 
 import (
-	"feishuReboot/global"
-	"feishuReboot/logger"
 	"fmt"
+	"go-web-template/global"
+	"go-web-template/logger"
 	"gopkg.in/yaml.v3"
 	"os"
 	"sync"

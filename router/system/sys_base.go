@@ -1,7 +1,7 @@
 package system
 
 import (
-	v1 "feishuReboot/api/v1"
+	v1 "go-web-template/api/v1"
 
 	"github.com/gin-gonic/gin"
 )
@@ -13,6 +13,7 @@ func (s *BaseRouter) InitBaseRouter(Router *gin.RouterGroup) (R gin.IRoutes) {
 	baseApi := v1.ApiGroupApp.SystemApiGroup.BaseApi
 	{
 		baseRouter.POST("login", baseApi.Login)
+		baseRouter.POST("refresh", baseApi.RefreshToken)
 	}
 	return baseRouter
 }
