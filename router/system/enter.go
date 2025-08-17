@@ -5,4 +5,5 @@ type RouterGroup struct {
 	UserRouter
 	RoleRouter
 	PermissionRouter
+	OperationLogRouter
 }

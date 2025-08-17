@@ -2,18 +2,18 @@ server:
   port: 8089
   mode: release
   timeout: 30s
-  password: admin  # 临时保留，后续移除
+  password: admin123  # 临时保留，后续移除
 
 log:
   path: logs/app
-  level: INFO
+  level: DEBUG
 
 database:
-  type: sqlite  # mysql, postgres, sqlite
+  type: mysql  # mysql, postgres, sqlite
   host: localhost
   port: 3306
   username: root
-  password: ""
+  password: "123456"
   database: go_web_admin
   ssl_mode: disable
   # SQLite配置（当type为sqlite时使用）
@@ -22,7 +22,7 @@ database:
 redis:
   host: localhost
   port: 6379
-  password: ""
+  password: "123456"
   database: 0
 
 jwt:

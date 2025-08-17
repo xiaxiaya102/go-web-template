@@ -41,11 +41,13 @@ func Routers() *gin.Engine {
 	// 私有接口组 - 需要认证
 	PrivateGroup := Router.Group("/api")
 	PrivateGroup.Use(middleware.AuthMiddleware())
+	PrivateGroup.Use(middleware.OperationLogMiddleware()) // 添加操作日志中间件
 	{
 		systemRouter.InitAuthBaseRouter(PrivateGroup)
 		systemRouter.InitUserRouter(PrivateGroup)
 		systemRouter.InitRoleRouter(PrivateGroup)
 		systemRouter.InitPermissionRouter(PrivateGroup)
+		systemRouter.InitOperationLogRouter(PrivateGroup)
 	}
 	logger.Info("Router Init Ok")
 	return Router
